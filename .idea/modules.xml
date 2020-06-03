@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/parcialGrupo7.iml" filepath="$PROJECT_DIR$/parcialGrupo7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/PARCIAL.iml" filepath="$PROJECT_DIR$/.idea/PARCIAL.iml" />
     </modules>
   </component>
 </project>
