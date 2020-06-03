@@ -15,13 +15,21 @@ public class Producto {
     @Id
     private String codigo;
     private String nombre;
-    private Double precioUnitario;
+    private Double preciounitario;
     private String descripcion;
     private Integer stock;
     private String foto1;
     private String foto2;
     private Integer cantidadvendido;
 
+
+    public Double getPreciounitario() {
+        return preciounitario;
+    }
+
+    public void setPreciounitario(Double preciounitario) {
+        this.preciounitario = preciounitario;
+    }
 
     public String getCodigo() {
         return codigo;
@@ -39,13 +47,7 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public Double getPrecioUnitario() {
-        return precioUnitario;
-    }
 
-    public void setPrecioUnitario(Double precioUnitario) {
-        this.precioUnitario = precioUnitario;
-    }
 
     public String getDescripcion() {
         return descripcion;
