@@ -12,10 +12,10 @@ import java.sql.Blob;
 @Table(name="producto")
 public class Producto {
 
-
     @Id
     @NotBlank
     private String codigo;
+
     private String nombre;
     private Double preciounitario;
     private String descripcion;

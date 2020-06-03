@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar.html :: header( title = 'Productos')"></head>
+<body class="container">
+
+<div th:replace="fragments/navbar.html :: barraPrueba"></div>
+
+
+<div class="container align-content-center">
+    <hr/>
+    <h5 th:text="${producto.nombre}">Lista de Productos</h5>
+    <hr/>
+
+    <div class="card container">
+
+        <div class="card-body row">
+            <div class="col-lg-4">
+                <img class="thumb" th:src="${producto.foto2}" alt="obligamePerro " width="300" height="200" data-pin-no-hover="true">
+            </div>
+            <div class="col-lg-4">
+                <p class="card-text" th:text="${'Codigo : ' + producto.codigo}">Descripción</p>
+                <p class="card-text" th:text="${'Precio : ' + producto.preciounitario}">Descripción</p>
+                <p class="card-text" th:text="${'Stock : ' + producto.stock}">Descripción</p>
+                <p class="card-text" th:text="${'Descripcion : ' + producto.descripcion}"></p>
+            </div>
+            <div class="col-lg-4">
+                <pre>
+                    </pre>
+                <div class="row">
+                    <a th:href="@{'/productos/listar'}" class="btn btn-info mr-2">Regresar</a>
+                    <br>
+                    <a href="#" class="btn btn-success">Agregar al carrito</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>
