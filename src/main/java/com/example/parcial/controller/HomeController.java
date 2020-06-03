@@ -75,8 +75,18 @@ public class HomeController {
     //-------------------- RECUPERAR CUENTA --------------
 
 
+    @GetMapping("recuperarContraseña")
+    public String recuperarContraseña(){
+
+        return "open/recuperarContra";
+    }
+
+    @GetMapping("registrarUsuario")
+    public String crearUsuaeio(){
 
 
+        return "open/registroRegistrado";
+    }
 
 
     //------------------- FIN RECUPERAR CUENTA ------------
