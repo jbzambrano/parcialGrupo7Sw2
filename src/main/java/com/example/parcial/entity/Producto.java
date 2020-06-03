@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import java.sql.Blob;
 
 @Entity
@@ -13,6 +14,7 @@ public class Producto {
 
 
     @Id
+    @NotBlank
     private String codigo;
     private String nombre;
     private Double preciounitario;
