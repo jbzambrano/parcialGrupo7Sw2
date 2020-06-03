@@ -25,6 +25,18 @@ public class HomeController {
     }
 
 
+    //-------------------- REGISTRO Y RECUPERAR CUENTA --------------
 
+    @GetMapping(value="/loginForm")
+    public String loginForm(){
+
+        return "open/index";
+    }
+
+
+
+
+
+    //------------------- FIN REGISTRO Y RECUPERAR CUENTA ------------
 
 }
