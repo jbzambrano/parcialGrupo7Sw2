@@ -2,6 +2,7 @@ package com.example.parcial.controller;
 
 import com.example.parcial.entity.Producto;
 import com.example.parcial.repository.CarritoRepository;
+import com.example.parcial.repository.PagoRepository;
 import com.example.parcial.repository.ProductoRepository;
 import com.example.parcial.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class GestorController {
 
     @Autowired
     UsuarioRepository usuarioRepository;
+
+    @Autowired
+    PagoRepository pagoRepository;
 
     @GetMapping(value = {"/list", ""})
     public String listarProductos(Model model) {
@@ -145,7 +149,7 @@ public class GestorController {
 
     @GetMapping("/estadistica1")
     public String estadistica1(Model model){
-        model.addAttribute("cantidadComprasRealizadas", carritoRepository.cantidadComprasRealizadas());
+        model.addAttribute("cantidadComprasRealizadas", pagoRepository.cantidadComprasRealizadas());
         return "estadisticas/cantidadCompras";
     }
 
