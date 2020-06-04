@@ -13,17 +13,9 @@ import java.util.List;
 @Repository
 public interface CarritoRepository extends JpaRepository<Carrito, Integer> {
 
-    @Query(value="SELECT count(idPago) as cantidadcompras" +
-            " FROM pago", nativeQuery=true)
-    List<comprasCarritoDto> cantidadComprasRealizadas();
 
-    @Query(value="SELECT sum(total) as totalfacturado" +
-            "FROM carrito", nativeQuery=true)
+    @Query(value="SELECT sum(total) as totalfacturado FROM parcial.carrito", nativeQuery=true)
     List<comprasCarritoDto> totalFacturado();
-
-
-
-
 
 
 
