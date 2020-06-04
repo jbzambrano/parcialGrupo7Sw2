@@ -1,6 +1,8 @@
 package com.example.parcial.controller;
 
+import com.example.parcial.entity.Carrito;
 import com.example.parcial.entity.Usuario;
+import com.example.parcial.repository.CarritoRepository;
 import com.example.parcial.repository.ProductoRepository;
 import com.example.parcial.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ import java.util.Properties;
 public class LoginController {
 
     @Autowired
+    CarritoRepository carritoRepository;
+
+    @Autowired
     UsuarioRepository usuarioRepository;
 
     @Autowired
@@ -48,17 +53,34 @@ public class LoginController {
 
 
     @GetMapping(value = "/redirectByRole")
-    public String redirectByRole(Authentication auth) {
+    public String redirectByRole(Authentication auth , HttpSession session) {
         String rol = "";
         for (GrantedAuthority role : auth.getAuthorities()) {
             rol = role.getAuthority();
             break;
         }
+
+        Usuario usuarioLogueado = usuarioRepository.findByCorreo(auth.getName());
+        session.setAttribute("usuario",usuarioLogueado);
+
+
         if (rol.equals("Admin")) {
             return "redirect:/admin";
         } else if (rol.equals("Gestor")) {
             return "redirect:/gestor";
         } else{
+
+            Integer dni = usuarioLogueado.getDni();
+            Double subtotal = 0.0;
+
+            Carrito carritoSesion = new Carrito();
+
+            carritoSesion.setDni(dni);
+
+            carritoRepository.save(carritoSesion);
+
+            session.setAttribute("carritoSesion",carritoSesion);
+
             return "redirect:/productos/lista";
         }
 
