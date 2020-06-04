@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar.html :: header( title = 'Productos')"></head>
+<body class="container">
+
+<div th:replace="fragments/navbar.html :: barraPrueba"></div>
+
+<div class="container align-content-center">
+    <hr/>
+    <h2>Lista de Gestores</h2>
+    <a class="btn btn-primary mt-4 mb-4" th:href="@{'/admin/new'}">Nuevo Gestor</a>
+    <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+    <hr/>
+
+    <form class="form-inline" method="post" th:action="@{'/admin/buscarGestor'}">
+        <div class="form-group">
+            <input name="inicio" type="text" class="form-control mb-4 mr-2" placeholder="Nombre del gestor" />
+        </div>
+
+        <button class="btn btn-primary mb-4" th:href="@{'/admin/listarGestor'}">Refrescar</button>
+    </form>
+
+    <div th:each="gestor, info : ${listaGestores}">
+        <div class="card container">
+            <div class="card-body row">
+                <div class="col-lg-4">
+                    <img class="thumb" th:src="@{/images/user.png}" alt="imagenGenerica " width="200" height="200" data-pin-no-hover="true">
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="card-title" th:text="|Nombre : ${gestor.nombre}|"></h5>
+                    <h5 class="card-title" th:text="|Apellido : ${gestor.apellido}|"></h5>
+                    <h5 class="card-title" th:text="|DNI : ${gestor.dni}|"></h5>
+                    <h5 class="card-title" th:text="|Correo : ${gestor.correo}|"></h5>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <a th:href="@{'/admin/edit' + '?id=' + ${gestor.dni}}" class="btn btn-primary">Editar</a>
+                    </div>
+                    <pre>
+
+                    </pre>
+                    <div class="row">
+                        <a th:href="@{'/admin/delete' + '?id=' + ${gestor.dni}}" class="btn btn-warning">Eliminar</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <pre>
+
+        </pre>
+
+    </div>
+
+</div>
+
+</body>
+</html>
