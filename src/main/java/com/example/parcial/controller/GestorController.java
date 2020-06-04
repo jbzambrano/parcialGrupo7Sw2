@@ -57,21 +57,47 @@ public class GestorController {
 
         if (bindingResult.hasErrors()) {
 
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+            System.out.println("este es el codigo" + producto.getCodigo());
+
             return "gestor/newFrmProducto";
 
         } else {
 
-            String codi = producto.getCodigo();
+            Optional<Producto> optionalProducto = productoRepository.findById(producto.getCodigo());
+            if(optionalProducto.isPresent()){
 
-            Optional<Producto> optionalProducto = productoRepository.findById(codi);
-
-            if (optionalProducto.isPresent()) {
-                attr.addFlashAttribute("msg", "Producto Actualizado Exitosamente");
-
-            } else {
+                model.addAttribute("errorCompany", "Este codigo ya existe");
+                return "gestor/newFrmProducto";
+            }else{
                 attr.addFlashAttribute("msg", "Producto Creado Exitosamente");
 
+                productoRepository.save(producto);
+
+                return "redirect:/gestor/list";
             }
+
+        }
+
+    }
+
+    @PostMapping("/saveProductEdit")
+    public String guardarNuevoProduct(@ModelAttribute("producto") @Valid Producto producto,
+                                       BindingResult bindingResult,
+                                       RedirectAttributes attr, Model model) {
+
+
+        if (bindingResult.hasErrors()) {
+
+
+            return "gestor/editFrmProducto";
+
+        } else {
+
+            attr.addFlashAttribute("msg", "Producto Actualizado Exitosamente");
 
             productoRepository.save(producto);
 
