@@ -19,9 +19,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 
 
@@ -81,10 +83,10 @@ public class HomeController {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                attr.addFlashAttribute("msgError", "Se le ha enviado a su correo una nueva contraseña");
+                attr.addFlashAttribute("msg", "Se le ha enviado a su correo una nueva contraseña");
                 return "redirect:/productos/recuperarContra";
             } else {
-                attr.addFlashAttribute("msgError", "El correo no existe en la base de datos");
+                attr.addFlashAttribute("msg", "El correo no existe en la base de datos");
                 return "redirect:/productos/recuperarContra";
             }
         }
@@ -94,16 +96,43 @@ public class HomeController {
     @GetMapping("recuperarContra")
     public String recuperarContra(@ModelAttribute("usuario") Usuario usuario, HttpSession session){
         Usuario u = (Usuario) session.getAttribute("user");
-        usuario.setCorreo(usuario.getCorreo());
 
         return "open/recuperarContra";
     }
 
     @GetMapping("registrarUsuario")
-    public String crearUsuaeio(){
+    public String creaRegistrado(@ModelAttribute("usuario") Usuario usuario,
+                                 Model model){
+
+        return"open/registroRegistrado";
+    }
 
 
-        return "open/registroRegistrado";
+    @PostMapping("guardarUsuario")
+    public String guardarUsuario(@ModelAttribute("usuario") @Valid Usuario usuario,BindingResult bindingResult,
+                                 Model model, RedirectAttributes attr){
+
+        Optional<Usuario> optionalUsuario = usuarioRepository.findById(usuario.getDni());
+        if (optionalUsuario.isPresent()){
+            model.addAttribute("msg", "Este usuario es invalido");
+            return "open/registroRegistrado";
+        } else {
+
+            if (usuario.getDni()==null) {
+                model.addAttribute("msg", "Debe rellenar el parámetro de DNI");
+                return "open/registroRegistrado";
+            } else {
+
+                if (bindingResult.hasErrors()) {
+                    //System.out.println("hola");
+                    return "open/registroRegistrado";
+                } else {
+                    usuarioRepository.guardarRegistrados(usuario.getDni(), usuario.getNombre(), usuario.getApellido(), usuario.getCorreo(), usuario.getPassword());
+                    System.out.println(usuario.getDni());
+                    return "redirect:/open/listaProductos";
+                }
+            }
+        }
     }
 
 

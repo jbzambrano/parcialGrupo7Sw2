@@ -20,6 +20,7 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Ingreso al Sistema</h1>
                                 </div>
+                                <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
                                 <form class="user">
                                     <div class="form-group">
                                         <label class="peque">Usuario</label>
@@ -35,7 +36,7 @@
                                             <label class="custom-control-label" for="customCheck">Recordarme</label>
                                         </div>
                                     </div>
-                                    <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                    <a type="submit" href="index.html" class="btn btn-primary btn-user btn-block">
                                         Ingresar
                                     </a>
                                 </form>
