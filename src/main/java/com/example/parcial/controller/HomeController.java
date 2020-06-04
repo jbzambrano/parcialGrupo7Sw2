@@ -102,10 +102,8 @@ public class HomeController {
     @GetMapping("registrarUsuario")
     public String crearUsuaeio(){
 
-
         return "open/registroRegistrado";
     }
-
 
     //------------------- FIN RECUPERAR CUENTA ------------
 
