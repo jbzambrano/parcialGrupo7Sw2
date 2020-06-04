@@ -1,5 +1,6 @@
 package com.example.parcial.repository;
 
+import com.example.parcial.dto.comprasCarritoDto;
 import com.example.parcial.entity.Carrito;
 import com.example.parcial.entity.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,13 +13,13 @@ import java.util.List;
 @Repository
 public interface CarritoRepository extends JpaRepository<Carrito, Integer> {
 
-    @Query(value="SELECT count(idPago)" +
+    @Query(value="SELECT count(idPago) as cantidadcompras" +
             " FROM pago", nativeQuery=true)
-    List<Carrito> cantidadComprasRealizadas();
+    List<comprasCarritoDto> cantidadComprasRealizadas();
 
-    @Query(value="SELECT sum(total)\n" +
+    @Query(value="SELECT sum(total) as totalfacturado" +
             "FROM carrito", nativeQuery=true)
-    List<Carrito> totalFacturado();
+    List<comprasCarritoDto> totalFacturado();
 
 
 

@@ -12,6 +12,20 @@
     <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
     <hr/>
 
+    <table class="table table-sm">
+        <tr>
+            <th>Nombre</th>
+            <th>Precio Unitario</th>
+            <th>Descripcion</th>
+            <th>Cantidad de Vendidos</th>
+        </tr>
+        <tr th:each="producto ,info : ${productoMenosVendido}">
+            <td th:text="${producto.getNombre()}">
+            <td th:text="${producto.getPreciounitario()}">
+            <td th:text="${producto.getDescripcion()}">
+            <td th:text="${producto.getCantidadvendido()}">
+        </tr>
+    </table>
 
 </div>
 </body>

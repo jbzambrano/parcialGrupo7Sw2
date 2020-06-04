@@ -1,7 +1,9 @@
 package com.example.parcial.controller;
 
 import com.example.parcial.entity.Producto;
+import com.example.parcial.repository.CarritoRepository;
 import com.example.parcial.repository.ProductoRepository;
+import com.example.parcial.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,12 @@ public class GestorController {
 
     @Autowired
     ProductoRepository productoRepository;
+
+    @Autowired
+    CarritoRepository carritoRepository;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     @GetMapping(value = {"/list", ""})
     public String listarProductos(Model model) {
@@ -134,4 +142,53 @@ public class GestorController {
             return "redirect:/gestor/list";
         }
     }
+
+    @GetMapping("/estadistica1")
+    public String estadistica1(Model model){
+        model.addAttribute("cantidadComprasRealizadas", carritoRepository.cantidadComprasRealizadas());
+        return "estadisticas/cantidadCompras";
+    }
+
+    @GetMapping("/estadistica2")
+    public String estadistica2(Model model){
+        model.addAttribute("totalFacturado", carritoRepository.totalFacturado());
+        return "estadisticas/totalFacturado";
+    }
+
+    @GetMapping("/estadistica3")
+    public String estadistica3(Model model){
+        model.addAttribute("cantidadProductosVendidos", productoRepository.cantiProductosVend());
+        return "estadisticas/cantidadProductosVendidos";
+    }
+
+    @GetMapping("/estadistica4")
+    public String estadistica4(Model model){
+        model.addAttribute("productoMasVendido", productoRepository.productMasVendido());
+        return "estadisticas/productoMasVendido";
+    }
+
+    @GetMapping("/estadistica5")
+    public String estadistica5(Model model){
+        model.addAttribute("productoMenosVendido", productoRepository.productMenosVendido());
+        return "estadisticas/productoMenosVendido";
+    }
+
+    @GetMapping("/estadistica6")
+    public String estadistica6(Model model){
+        model.addAttribute("productoMasCaro", productoRepository.productMasCaro());
+        return "estadisticas/productoMasCaro";
+    }
+
+    /*
+    @GetMapping("/estadistica7")
+    public String estadistica7(Model model){
+        model.addAttribute("usuarioMasGastador", usuarioRepository.AUNNOHAYQUEY());
+        return "estadisticas/cantidadCompras";
+    }
+    */
+
+
+
+
+
 }

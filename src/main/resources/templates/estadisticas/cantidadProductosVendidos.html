@@ -13,7 +13,16 @@
     <h2>Cantidad de Productos Vendidos</h2>
     <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
     <hr/>
-
+    <table class="table table-sm">
+        <tr>
+            <th>Nombre</th>
+            <th>Cantidad de Vendidos</th>
+        </tr>
+        <tr th:each="producto ,info : ${cantidadProductosVendidos}">
+            <td th:text="${producto.getNombre()}">
+            <td th:text="${producto.getCantidadvendido()}">
+        </tr>
+    </table>
 
 </div>
 </body>
