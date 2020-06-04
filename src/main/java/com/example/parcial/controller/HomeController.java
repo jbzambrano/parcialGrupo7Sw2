@@ -18,6 +18,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
@@ -51,42 +52,49 @@ public class HomeController {
                                       RedirectAttributes attr){
 
         List<Usuario> usuarioCorreo = usuarioRepository.obtenerCorreo(correo);
+        if(bindingResult.hasErrors()) {
+            return "open/recuperarContra";
+        }
+        else {
 
-        if (usuarioCorreo.size()!=0){
-            //Se envie correo
+            if (usuarioCorreo.size() != 0) {
+                //Se envie correo
                 String from = "a20150875@pucp.edu.pe";
                 String host = "smtp.test.com";
 
                 Properties properties = new Properties();
-                properties.setProperty("mail.smtp.host",host);
+                properties.setProperty("mail.smtp.host", host);
                 Session session = Session.getDefaultInstance(properties);
 
-            try {
-                MimeMessage message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(from));
-                message.setRecipient(Message.RecipientType.TO, new InternetAddress(correo));
-                message.setSubject("Nueva Contraseña");
-                //Genera la contraseña de 8 letras y 2 numeros
-                String nuevaContra = RandomString.getStringLetras(8) + RandomString.getStringNumeros(2);
-                message.setText("Su nueva contraseña es: " + nuevaContra );
-                //Aqui deberia setear su nueva contraseña
-                String passwordhash = BCrypt.hashpw(nuevaContra, BCrypt.gensalt());
-                usuario.setPassword(passwordhash);
-                Transport.send(message);
-            } catch (Exception e){
-                e.printStackTrace();
+                try {
+                    MimeMessage message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress(from));
+                    message.setRecipient(Message.RecipientType.TO, new InternetAddress(correo));
+                    message.setSubject("Nueva Contraseña");
+                    //Genera la contraseña de 8 letras y 2 numeros
+                    String nuevaContra = RandomString.getStringLetras(8) + RandomString.getStringNumeros(2);
+                    message.setText("Su nueva contraseña es: " + nuevaContra);
+                    //Aqui deberia setear su nueva contraseña
+                    String passwordhash = BCrypt.hashpw(nuevaContra, BCrypt.gensalt());
+                    usuario.setPassword(passwordhash);
+                    Transport.send(message);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                attr.addFlashAttribute("msgError", "Se le ha enviado a su correo una nueva contraseña");
+                return "redirect:/productos/recuperarContra";
+            } else {
+                attr.addFlashAttribute("msgError", "El correo no existe en la base de datos");
+                return "redirect:/productos/recuperarContra";
             }
-            attr.addFlashAttribute("msgError","Se le ha enviado a su correo una nueva contraseña");
-            return "redirect:/productos/recuperarContra";
-        } else {
-            attr.addFlashAttribute("msgError","El correo no existe en la base de datos");
-            return "redirect:/productos/recuperarContra";
         }
 
     }
 
-    @PostMapping("recuperarContra")
-    public String recuperatContra(){
+    @GetMapping("recuperarContra")
+    public String recuperarContra(@ModelAttribute("usuario") Usuario usuario, HttpSession session){
+        Usuario u = (Usuario) session.getAttribute("user");
+        usuario.setCorreo(usuario.getCorreo());
 
         return "open/recuperarContra";
     }
