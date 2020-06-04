@@ -9,13 +9,5 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 //@EnableWebSecurity
 public class SecurityConfig{
 
-    //@Override
-   // protected void configure(HttpSecurity http)throws Exception{
-
-
-        //el tiempo esta en segundos
-       // http.rememberMe().tokenValiditySeconds(172800).rememberMeParameter("recordar");
-   // }
-
 
 }

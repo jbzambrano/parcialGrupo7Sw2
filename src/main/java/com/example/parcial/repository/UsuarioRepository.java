@@ -31,4 +31,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     @Query (value="call guardarRegistrados(?1, ?2, ?3, ?4,?5)", nativeQuery=true)
     List <Usuario> guardarRegistrados(Integer dni, String nombre,String apellido,String correo,String password);
 
+
+
 }

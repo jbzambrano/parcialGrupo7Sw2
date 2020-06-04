@@ -76,9 +76,10 @@ public class HomeController {
                     //Genera la contraseña de 8 letras y 2 numeros
                     String nuevaContra = RandomString.getStringLetras(8) + RandomString.getStringNumeros(2);
                     message.setText("Su nueva contraseña es: " + nuevaContra);
-                    //Aqui deberia setear su nueva contraseña
+                    //Aqui deberia setear y hashear su nueva contraseña
                     String passwordhash = BCrypt.hashpw(nuevaContra, BCrypt.gensalt());
                     usuario.setPassword(passwordhash);
+                    //Envia email
                     Transport.send(message);
                 } catch (Exception e) {
                     e.printStackTrace();
