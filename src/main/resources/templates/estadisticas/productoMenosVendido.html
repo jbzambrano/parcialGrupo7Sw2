@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar.html :: header( title = 'Estadisticas 5')"></head>
+
+
+<body class="container">
+
+<div th:replace="fragments/navbar.html :: barraPrueba"></div>
+<div class="container align-content-center">
+    <hr/>
+    <h2>Producto Menos Vendido</h2>
+    <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+    <hr/>
+
+</body>
+</html>
