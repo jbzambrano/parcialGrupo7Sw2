@@ -12,7 +12,6 @@ import java.util.List;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-
     @Query(value = "select * from usuario where idRol = ?1",
             nativeQuery = true)
     List<Usuario> listaGestores(Integer idrol);
@@ -24,11 +23,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     List<Usuario> buscarGestor(String nombre);
 
 
-
-
     @Query(value="SELECT * FROM usuario u" +
             "WHERE correo=?1", nativeQuery = true)
     List <Usuario> obtenerCorreo (String correo);
-
 
 }

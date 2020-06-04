@@ -20,18 +20,18 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Recuperar Contraseña</h1>
                             </div>
-                            <form th:action="@{'/system/guardarCont'}" method="post" class="user">
+                            <form th:action="@{'/productos/guardarNuevaContraseña'}" th:object="${usuario}" method="post" class="user">
                                 <div class="form-group">
                                     <label class="peque">Correo</label>
                                     <input type="email" class="form-control-log form-control-user2" name="correo" id="correo">
                                 </div>
-                                <div class="text-danger" th:if="${msg!=null}" th:text="${msg}"></div>
+                                <div class="text-danger" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></div>
                                 <hr>
                                 <div class="d-flex">
                                     <a type="button" th:href="@{/login/inicioSesion}" class="btn btn-primary btn-user btn-block" >
                                         Regresar
                                     </a>
-                                    <a type="button" th:href="@{/login/inicioSesion}" class="btn btn-primary btn-user btn-block" >
+                                    <a type="button"  class="btn btn-primary btn-user btn-block" >
                                         Enviar Correo
                                     </a>
                                 </div>
