@@ -1,6 +1,8 @@
 package com.example.parcial.controller;
 
+import com.example.parcial.entity.Carrito;
 import com.example.parcial.entity.Usuario;
+import com.example.parcial.repository.CarritoRepository;
 import com.example.parcial.repository.ProductoRepository;
 import com.example.parcial.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ import java.util.Properties;
 @RequestMapping("")
 @Controller
 public class LoginController {
+
+    @Autowired
+    CarritoRepository carritoRepository;
 
     @Autowired
     UsuarioRepository usuarioRepository;
@@ -64,6 +69,18 @@ public class LoginController {
         } else if (rol.equals("Gestor")) {
             return "redirect:/gestor";
         } else{
+
+            Integer dni = usuarioLogueado.getDni();
+            Double subtotal = 0.0;
+
+            Carrito carritoSesion = new Carrito();
+
+            carritoSesion.setDni(dni);
+
+            carritoRepository.save(carritoSesion);
+
+            session.setAttribute("carritoSesion",carritoSesion);
+
             return "redirect:/productos/lista";
         }
 
