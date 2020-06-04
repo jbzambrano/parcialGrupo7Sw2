@@ -17,11 +17,19 @@ public interface ProductoRepository extends JpaRepository<Producto, String> {
     @Query(value="SELECT nombre, cantidadVendido FROM parcial.producto", nativeQuery=true)
     List<cantidadProductosDto> cantiProductosVend ();
 
-    @Query(value="SELECT * FROM parcial.producto ORDER BY cantidadVendido DESC LIMIT 1", nativeQuery=true)
-    List<Producto> productMasVendido();
+    @Query(value="SELECT codigo, nombre, precioUnitario, descripcion, stock, cantidadVendido, (stock- cantidadVendido) as valides \n" +
+            "FROM parcial.producto \n" +
+            "GROUP BY codigo\n" +
+            "ORDER BY valides ASC\n" +
+            "LIMIT 1", nativeQuery=true)
+    List <productosDto> productMasVendido();
 
-    @Query(value="SELECT * FROM parcial.producto ORDER BY cantidadVendido ASC LIMIT 1", nativeQuery=true)
-    List<Producto> productMenosVendido();
+    @Query(value="SELECT codigo, nombre, precioUnitario, descripcion, stock, cantidadVendido, (stock- cantidadVendido) as valides \n" +
+            "FROM parcial.producto \n" +
+            "GROUP BY codigo\n" +
+            "ORDER BY valides DESC\n" +
+            "LIMIT 1", nativeQuery=true)
+    List<productosDto> productMenosVendido();
 
     @Query(value="SELECT * FROM parcial.producto ORDER BY precioUnitario DESC LIMIT 1", nativeQuery= true)
     List<Producto> productMasCaro();
