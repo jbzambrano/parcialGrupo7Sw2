@@ -7,7 +7,7 @@ public interface productosDto {
     int getPreciounitario();
     String getDescripcion();
     int getStock();
-    int getCantidadvendidos();
+    int getCantidadvendido();
     int getValides();
 
 }

@@ -18,7 +18,7 @@ public interface ProductoRepository extends JpaRepository<Producto, String> {
     @Query(value="SELECT nombre, cantidadVendido FROM parcial.producto", nativeQuery=true)
     List<cantidadProductosDto> cantiProductosVend ();
 
-    @Query(value="SELECT codigo, nombre, precioUnitario, descripcion, stock, cantidadVendido, (stock- cantidadVendido) as valides \n" +
+    @Query(value="SELECT codigo, nombre, precioUnitario, descripcion, stock, cantidadVendido, (stock - cantidadVendido) as valides \n" +
             "FROM parcial.producto \n" +
             "GROUP BY codigo\n" +
             "ORDER BY valides ASC\n" +
