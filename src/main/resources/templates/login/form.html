@@ -9,19 +9,72 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <title>Ingreso al sistema</title>
 </head>
-<body class="text-center">
-<div class="container theme-showcase">
-    <form class="form-signin" th:action="@{/processLogin}" method="post">
-        <h3 class="form-signin-heading">Acceso</h3>
+<body class="bg-gradient-primary">
+<div th:replace="fragments/navbar.html :: barraPrueba"></div>
 
-        <label for="username" class="sr-only">Correo</label>
-        <input type="text" id="username" name="username" class="form-control" placeholder="Usuario" required autofocus>
-        <label for="password" class="sr-only">Contraseña</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+<div class="container">
 
-        <h4 th:if="${param.error}" class="form-signin-heading" style="color:red">Acceso denegado</h4>
-        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Ingresar"></input>
-    </form>
-</div>
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-6 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Ingreso al Sistema</h1>
+                                </div>
+                                <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+                                <form class="user"  th:action="@{/processLogin}" method="post">
+                                    <div class="form-group">
+                                        <label class="peque">Usuario</label>
+                                        <input type="email" class="form-control form-control-user" id="username" name="username" aria-describedby="emailHelp" placeholder="Usuario">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="peque">Contraseña</label>
+                                        <input type="password" id="password" name="password" class="form-control form-control-user" placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox small">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                                            <label class="custom-control-label" for="customCheck">Recordarme</label>
+                                        </div>
+                                    </div>
+                                    <a type="submit" class="btn btn-lg btn-primary btn-block">
+                                        Ingresar
+                                    </a>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" th:href="@{/recuperarContra}">Recuperar Contraseña</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" th:href="@{/registrarUsuario}">Registrarse</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
 </body>
 </html>

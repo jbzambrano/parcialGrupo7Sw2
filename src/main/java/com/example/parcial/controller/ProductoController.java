@@ -28,9 +28,9 @@ import java.util.Optional;
 import java.util.Properties;
 
 
-@RequestMapping("")
+@RequestMapping("/productos")
 @Controller
-public class HomeController {
+public class ProductoController {
 
 
     @Autowired
@@ -39,7 +39,7 @@ public class HomeController {
     @Autowired
     ProductoRepository productoRepository;
 
-    @GetMapping(value = {"/productos"})
+    @GetMapping(value = {"/lista"})
     public String listaProductos(Model model) {
         model.addAttribute("listaProductos", productoRepository.findAll());
         return "open/listaProductos";

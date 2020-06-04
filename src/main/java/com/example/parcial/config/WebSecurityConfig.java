@@ -25,7 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
             http.formLogin()
                 .loginPage("/loginForm")
-                .loginProcessingUrl("/processLogin");
+                .loginProcessingUrl("/processLogin")
+                .defaultSuccessUrl("/redirectByRole",true);
             http.authorizeRequests()
                     .antMatchers("/gestor/","/gestor/**").hasAuthority("Gestor")
                     .antMatchers("/admin","/admin/**").hasAuthority("Admin")
