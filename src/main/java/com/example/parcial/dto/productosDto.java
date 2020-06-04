@@ -8,6 +8,6 @@ public interface productosDto {
     String getDescripcion();
     int getStock();
     int getCantidadvendidos();
-    int valides();
+    int getValides();
 
 }
