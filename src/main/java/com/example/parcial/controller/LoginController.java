@@ -71,7 +71,7 @@ public class LoginController {
         } else{
 
             Integer dni = usuarioLogueado.getDni();
-            Double subtotal = 0.0;
+            //Double subtotal = 0.0;
 
             Carrito carritoSesion = new Carrito();
 

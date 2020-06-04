@@ -9,8 +9,9 @@
     <hr/>
     <h2>Lista de Productos</h2>
     <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
-    <hr/>
+    <div th:if="${msgredun != null}" th:text="${msgredun}" class="alert alert-danger" role="alert"></div>
 
+    <hr/>
     <form class="form-inline" method="post" th:action="@{'/productos/buscarProductosPorInicioDeNombreOId'}">
         <div class="form-group">
             <input name="inicio" type="text" class="form-control mb-4 mr-2" placeholder="Nombre del Producto" />
@@ -34,7 +35,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="row">
-                        <a href="#" class="btn btn-success">Agregar al carrito</a>
+                        <a th:href="@{'/carrito/agregarProducto' + '?codigo=' + ${pro.codigo}}" class="btn btn-success">Agregar al carrito</a>
                     </div>
                     <pre>
                     </pre>
