@@ -1,6 +1,7 @@
 package com.example.parcial.repository;
 
 import com.example.parcial.dto.cantidadProductosDto;
+import com.example.parcial.dto.productosDto;
 import com.example.parcial.entity.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
