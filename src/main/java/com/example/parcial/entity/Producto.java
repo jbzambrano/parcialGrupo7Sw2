@@ -2,14 +2,9 @@ package com.example.parcial.entity;
 
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 import java.sql.Blob;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name="producto")
@@ -21,18 +16,18 @@ public class Producto {
     private String codigo;
 
     @NotBlank
-    @Size(max = 40)
+    @Size(max = 45)
     private String nombre;
 
-    @Digits(integer = 4, fraction = 2)
+    @Digits(integer = 10, fraction = 4)
     @Positive
     private Double preciounitario;
 
     @NotBlank
-    @Size(max = 255)
+    @Size(max = 45)
     private String descripcion;
 
-    @Digits(integer = 6, fraction = 0)
+    @Digits(integer = 11, fraction = 0)
     @Positive
     private Integer stock;
     private String foto1;
