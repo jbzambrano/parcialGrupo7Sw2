@@ -5,7 +5,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.sql.Blob;
 
 @Entity
@@ -14,14 +17,27 @@ public class Producto {
 
     @Id
     @NotBlank
+    @Size(max = 3)
     private String codigo;
 
+    @NotBlank
+    @Size(max = 40)
     private String nombre;
+
+    @Digits(integer = 4, fraction = 2)
+    @Positive
     private Double preciounitario;
+
+    @NotBlank
+    @Size(max = 255)
     private String descripcion;
+
+    @Digits(integer = 6, fraction = 0)
+    @Positive
     private Integer stock;
     private String foto1;
     private String foto2;
+
     private Integer cantidadvendido;
 
 
