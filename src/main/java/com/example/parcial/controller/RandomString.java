@@ -29,4 +29,13 @@ public class RandomString {
     }
 
 
+    static int validarTarjeta (Integer tarjeta ){
+
+
+
+        return 0;
+
+    }
+
+
 }
