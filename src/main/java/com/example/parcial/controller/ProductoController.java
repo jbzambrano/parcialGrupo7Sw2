@@ -1,6 +1,7 @@
 package com.example.parcial.controller;
 
 import com.example.parcial.controller.RandomString;
+import com.example.parcial.entity.Producto;
 import com.example.parcial.entity.Usuario;
 import com.example.parcial.repository.ProductoRepository;
 import com.example.parcial.repository.UsuarioRepository;
@@ -29,7 +30,7 @@ import java.util.Properties;
 
 @RequestMapping("/productos")
 @Controller
-public class HomeController {
+public class ProductoController {
 
 
     @Autowired
@@ -38,11 +39,51 @@ public class HomeController {
     @Autowired
     ProductoRepository productoRepository;
 
-    @GetMapping(value = {"", "/"})
+    @GetMapping(value = {"/lista"})
     public String listaProductos(Model model) {
         model.addAttribute("listaProductos", productoRepository.findAll());
         return "open/listaProductos";
     }
+    //-------------------- Buscador de Productos FERNANDO--------------
+
+
+    @PostMapping(value ="/buscarProductosPorInicioDeNombreOId")
+    public String listaProductosxNombre(@RequestParam("inicio") String inicio,
+                                        Model model) {
+
+
+        List<Producto> listita = productoRepository.buscarProductosPorInicioDeNombreOId(inicio,inicio);
+
+        model.addAttribute("listaProductos",listita);
+
+        return "open/listaProductos";
+    }
+
+
+    //------------------- FIN Buscador de Productos FERNANDO ------------
+
+
+    //------------------- Detalles de Productos FERNANDO ------------
+
+    @GetMapping("/detalles")
+    public String borrarTransportista(Model model,
+                                      @RequestParam("id") String id,
+                                      RedirectAttributes attr) {
+
+        Optional<Producto> optionalProducto = productoRepository.findById(id);
+
+        Producto producto = optionalProducto.get();
+
+        model.addAttribute("producto",producto);
+
+        return "open/productdetails";
+
+    }
+
+    //------------------- FIN Detalles de Productos FERNANDO ------------
+
+
+
 
 
     //-------------------- RECUPERAR CUENTA --------------
@@ -85,10 +126,10 @@ public class HomeController {
                     e.printStackTrace();
                 }
                 attr.addFlashAttribute("msg", "Se le ha enviado a su correo una nueva contraseña");
-                return "redirect:/productos/recuperarContra";
+                return "redirect:/recuperarContra";
             } else {
                 attr.addFlashAttribute("msg", "El correo no existe en la base de datos");
-                return "redirect:/productos/recuperarContra";
+                return "redirect:/recuperarContra";
             }
         }
 
@@ -133,7 +174,7 @@ public class HomeController {
                     if (password.equals(password1)){
                         usuarioRepository.guardarRegistrados(usuario.getDni(), usuario.getNombre(), usuario.getApellido(), usuario.getCorreo(), usuario.getPassword());
                         System.out.println(usuario.getDni());
-                        return "redirect:/productos/";
+                        return "redirect:/";
                     }else {
                         model.addAttribute("msg", "Las contraseñas deben ser iguales");
                         return "open/registroRegistrado";

@@ -21,7 +21,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">Registro de Usuario</h1>
                                 </div>
                                 <div th:if="${msg != null}" th:text="${msg}" class="alert alert-danger" role="alert"></div>
-                                <form method="post" th:action="@{'/productos/guardarUsuario'}" th:object="${usuario}">
+                                <form method="post" th:action="@{'/guardarUsuario'}" th:object="${usuario}">
 
                                     <input type="hidden" th:field="*{idrol}" />
 
@@ -62,7 +62,7 @@
                                     <hr>
 
                                     <div class="d-flex">
-                                        <a type="button" th:href="@{/login/inicioSesion}" class="btn btn-primary btn-user btn-block" >
+                                        <a type="button" th:href="@{'/loginForm'}" class="btn btn-primary btn-user btn-block" >
                                             Regresar
                                         </a>
                                         <button type="submit" class="btn btn-primary  btn-user btn-block" >

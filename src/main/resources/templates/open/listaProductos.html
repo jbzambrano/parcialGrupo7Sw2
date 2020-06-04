@@ -16,7 +16,7 @@
             <input name="inicio" type="text" class="form-control mb-4 mr-2" placeholder="Nombre del Producto" />
         </div>
 
-        <button class="btn btn-primary mb-4" th:href="@{'/productos/listar'}">Refrescar</button>
+        <button class="btn btn-primary mb-4" th:href="@{'/productos/lista'}">Refrescar</button>
     </form>
 
     <div th:each="pro, info : ${listaProductos}">
