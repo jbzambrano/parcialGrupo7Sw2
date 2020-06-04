@@ -46,8 +46,6 @@ public class AdminController {
         if (usuario.getDni()==null) {
             model.addAttribute("msgError", "Debe rellenar el parámetro de DNI");
             return "admin/form";
-
-
         } else {
             if (bindingResult.hasErrors()) {
 

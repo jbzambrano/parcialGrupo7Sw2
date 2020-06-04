@@ -20,39 +20,54 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Registro de Usuario</h1>
                                 </div>
-                                <form class="user">
+                                <div th:if="${msg != null}" th:text="${msg}" class="alert alert-danger" role="alert"></div>
+                                <form method="post" th:action="@{'/productos/guardarUsuario'}" th:object="${usuario}">
+
+                                    <input type="hidden" th:field="*{idrol}" />
+
                                     <div class="form-group">
-                                        <label class="peque">Nombre</label>
-                                        <input type="text" class="form-control form-control-user" id="nombre" placeholder="nombre">
+                                            <label for="nombre">Nombre:</label>
+                                            <input type="text" class="form-control" th:field="*{nombre}"/>
+                                            <div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                            <label for="apellido">Apellido: </label>
+                                            <input type="text" class="form-control" th:field="*{apellido}"/>
+                                            <div class="text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">apellido</div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="peque">Apellido</label>
-                                        <input type="text" class="form-control form-control-user" id="apellido" placeholder="apellido">
+                                        <label for="dni">DNI:</label>
+                                        <input type="text" class="form-control" th:field="*{dni}"/>
+                                        <div class="text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}">Error</div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="correo">Correo: </label>
+                                        <input type="text" class="form-control" th:field="*{correo}"/>
+                                        <div class="text-danger" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}">Error</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="password">Contraseña</label>
+                                        <input type="password" class="form-control" th:field="*{password}">
+                                        <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="peque">DNI</label>
-                                        <input type="text" class="form-control form-control-user" id="dni" placeholder="dni">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="peque">Correo</label>
-                                        <input type="email" class="form-control form-control-user" id="correo" aria-describedby="emailHelp" placeholder="correo">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="peque">Contraseña</label>
-                                        <input type="password" class="form-control form-control-user" id="password" placeholder="password">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="peque">Confirmar Contraseña</label>
-                                        <input type="password" class="form-control form-control-user" id="password1" placeholder="password">
+                                        <label class="password1">Confirmar Contraseña</label>
+                                        <input type="password" class="form-control form-control-user" id="password1">
+                                        <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</div>
                                     </div>
                                     <hr>
+
                                     <div class="d-flex">
                                         <a type="button" th:href="@{/login/inicioSesion}" class="btn btn-primary btn-user btn-block" >
                                             Regresar
                                         </a>
-                                        <a type="button" th:href="@{/login/inicioSesion}" class="btn btn-primary btn-user btn-block" >
+                                        <button type="submit" class="btn btn-primary  btn-user btn-block" >
                                             Registrar
-                                        </a>
+                                        </button>
                                     </div>
                                 </form>
                             </div>
