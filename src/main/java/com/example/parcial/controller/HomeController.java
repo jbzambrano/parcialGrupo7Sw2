@@ -104,10 +104,8 @@ public class HomeController {
     public String creaRegistrado(@ModelAttribute("usuario") Usuario usuario,
                                  Model model){
 
-<<<<<<< HEAD
         return "open/registroRegistrado";
-=======
-        return"open/registroRegistrado";
+
     }
 
 
@@ -136,7 +134,6 @@ public class HomeController {
                 }
             }
         }
->>>>>>> 4db8246aa2da979f3d18c8c6551f405fd40aaf41
     }
 
     //------------------- FIN RECUPERAR CUENTA ------------
