@@ -39,7 +39,7 @@ public class AdminController {
     public String guardarGestor(@ModelAttribute("usuario") @Valid Usuario usuario
             , BindingResult bindingResult
             , Model model, RedirectAttributes attr) {
-
+        usuario.setActivo(1);
         usuario.setIdrol(2);
         System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         System.out.println(usuario.getDni());

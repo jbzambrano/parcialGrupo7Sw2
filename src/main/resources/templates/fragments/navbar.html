@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="header (title)" >
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
@@ -18,10 +18,10 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li sec:authorize="hasAuthority('Gestor')" class="nav-item active">
                 <a class="nav-link" th:href="@{'/gestor/list'}">Productos <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li sec:authorize="hasAuthority('Admin')" class="nav-item">
                 <a class="nav-link" th:href="@{'/admin'}">Gestores</a>
             </li>
             <li class="nav-item dropdown">
@@ -48,7 +48,7 @@
             <li class="nav-item">
                 <a class="nav-link disabled" href="#">Disabled</a>
             </li>
-            <li class="nav-item">
+            <li sec:authorize="hasAuthority('Gestor')" class="nav-item">
                 <a class="nav-link" href="#">Estadisticas para Gestores</a>
             </li>
             <li class="nav-item">
@@ -61,8 +61,14 @@
             <a class="nav-link" href="#">Carrito</a>
         </div>
 
-        <div class="form-inline my-2 my-lg-0 ">
+        <div sec:authorize="isAnonymous()" class="form-inline my-2 my-lg-0">
             <a class="nav-link" th:href="@{/loginForm}">Iniciar Sesión</a>
+        </div>
+        <div sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0">
+            <span th:text="|Bienvenido ${#authentication.name}|"></span>
+            <form th:action="@{/cerrar}" method="post">
+                <input class="btn btn-link" type="submit" value="(Cerrar Sesión)"/>
+            </form>
         </div>
 
         <!--
