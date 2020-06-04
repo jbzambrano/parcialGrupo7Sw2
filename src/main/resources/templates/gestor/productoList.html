@@ -5,9 +5,13 @@
 
 <div th:replace="fragments/navbar.html :: barraPrueba"></div>
 
+
 <div class="container align-content-center">
     <hr/>
     <h2>Lista de Productos</h2>
+
+
+
     <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
     <hr/>
 
@@ -18,6 +22,7 @@
 
         <button class="btn btn-primary mb-4" th:href="@{'/productos/listar'}">Refrescar</button>
     </form>
+    <a class="btn btn-success mt-4 mb-4" th:href="@{'/gestor/newProduct'}">Nueva Producto</a>
 
     <table class="table table-bordered">
         <thead class="thead-dark">

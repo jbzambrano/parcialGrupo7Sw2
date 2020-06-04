@@ -5,11 +5,13 @@ import com.example.parcial.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/gestor")
 @Controller
@@ -29,7 +31,7 @@ public class GestorController {
         return "gestor/productoList";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/newProduct")
     public String nuevoProductoFrm(@ModelAttribute("producto") Producto producto,
                                    Model model) {
 
@@ -47,4 +49,63 @@ public class GestorController {
         return "gestor/newFrmProducto";
     }
 
+    @PostMapping("/saveProduct")
+    public String guardarNuevoProducto(@ModelAttribute("producto") @Valid Producto producto,
+                                       BindingResult bindingResult,
+                                       RedirectAttributes attr, Model model) {
+
+
+        if (bindingResult.hasErrors()) {
+
+            return "gestor/newFrmProducto";
+
+        } else {
+
+            String codi = producto.getCodigo();
+
+            Optional<Producto> optionalProducto = productoRepository.findById(codi);
+
+            if (optionalProducto.isPresent()) {
+                attr.addFlashAttribute("msg", "Producto Actualizado Exitosamente");
+
+            } else {
+                attr.addFlashAttribute("msg", "Producto Creado Exitosamente");
+
+            }
+
+            productoRepository.save(producto);
+
+
+            return "redirect:/gestor/list";
+        }
+
+    }
+
+    @GetMapping("/editProducto")
+    public String editarTransportista(@ModelAttribute("producto") Producto producto,
+                                      Model model,
+                                      @RequestParam("id") String id) {
+
+        Optional<Producto> optionalProducts = productoRepository.findById(id);
+
+        //List<Region> listareg = regionRepository.findAll();
+        //List<Suppliers> listasuppli = supplierRepository.findAll();
+
+        //List<Categories> listacatego = categoryRepository.findAll();
+        //List<Suppliers> listasuppli = supplierRepository.findAll();
+
+        if (optionalProducts.isPresent()) {
+
+            producto = optionalProducts.get();
+
+            //model.addAttribute("listareg",listareg);
+            model.addAttribute("producto", producto);
+            //model.addAttribute("listacatego",listacatego);
+            //model.addAttribute("listasuppli",listasuppli);
+
+            return "gestor/editFrmProducto";
+        } else {
+            return "redirect:/gestor/list";
+        }
+    }
 }
