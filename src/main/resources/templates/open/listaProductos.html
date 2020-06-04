@@ -11,45 +11,35 @@
     <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
     <hr/>
 
-    <form class="form-inline" method="post" th:action="@{'/product/buscarPorInicio'}">
+    <form class="form-inline" method="post" th:action="@{'/productos/buscarProductosPorInicioDeNombreOId'}">
         <div class="form-group">
             <input name="inicio" type="text" class="form-control mb-4 mr-2" placeholder="Nombre del Producto" />
         </div>
 
-        <button class="btn btn-primary mb-4" th:href="@{'/product/list'}">Refrescar</button>
+        <button class="btn btn-primary mb-4" th:href="@{'/productos/listar'}">Refrescar</button>
     </form>
 
     <div th:each="pro, info : ${listaProductos}">
         <div class="card container">
-            <!--
-            <img class="card-img-top" src="..." alt="Card image cap">
-            -->
 
             <div class="card-body row">
                 <div class="col-lg-4">
-                    <p class="card-text" th:text="${'Descripcion : ' + pro.descripcion}">Descripción</p>
+                    <img class="thumb" th:src="${pro.foto2}" alt="obligamePerro " width="300" height="200" data-pin-no-hover="true">
                 </div>
                 <div class="col-lg-4">
                     <h5 class="card-title" th:text="${pro.nombre}"></h5>
-
                     <p class="card-text" th:text="${'Codigo : ' + pro.codigo}">Descripción</p>
                     <p class="card-text" th:text="${'Precio : ' + pro.preciounitario}">Descripción</p>
                     <p class="card-text" th:text="${'Stock : ' + pro.stock}">Descripción</p>
-                    <!--
-                    <p class="card-text" th:text="${'Descripcion : ' + pro.descripcion}">Descripción</p>
-                    -->
-
-
                 </div>
                 <div class="col-lg-4">
                     <div class="row">
-                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                        <a href="#" class="btn btn-success">Agregar al carrito</a>
                     </div>
                     <pre>
-
                     </pre>
                     <div class="row">
-                        <a href="#" class="btn btn-primary">Detalles</a>
+                        <a th:href="@{'/productos/detalles' + '?id=' + ${pro.codigo}}" class="btn btn-primary">Detalles</a>
                     </div>
                 </div>
 

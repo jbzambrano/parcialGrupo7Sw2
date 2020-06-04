@@ -22,9 +22,11 @@
                                 </div>
                                 <form class="user">
                                     <div class="form-group">
+                                        <label class="peque">Usuario</label>
                                         <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Usuario">
                                     </div>
                                     <div class="form-group">
+                                        <label class="peque">Contraseña</label>
                                         <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
                                     </div>
                                     <div class="form-group">
@@ -39,10 +41,10 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="forgot-password.html">Recuperar Contraseña</a>
+                                    <a class="small" th:href="@{/productos/recuperarContraseña}">Recuperar Contraseña</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="register.html">Registrarse</a>
+                                    <a class="small" th:href="@{/productos/registrarUsuario}">Registrarse</a>
                                 </div>
                             </div>
                         </div>

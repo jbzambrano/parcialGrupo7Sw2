@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar.html :: header( title = 'Formulario Nuevo Producto')"></head>
+<body class="container">
+
+<div th:replace="fragments/navbar.html :: barraPrueba"></div>
+<h2 th:text="${producto.codigo==null?'Nuevo Producto':'Editar Producto'}">Nuevo Producto</h2>
+<hr/>
+<form method="post" th:action="@{'/gestor/saveProduct'}" th:object="${producto}">
+
+    <div class="form-group">
+        <label for="codigo">codigo</label>
+        <input type="text" class="form-control" th:field="*{codigo}">
+        <div class="text-danger" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></div>
+    </div>
+    <div class="form-group">
+        <label for="nombre">nombre</label>
+        <input type="text" class="form-control" th:field="*{nombre}">
+        <div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+    </div>
+    <div class="form-group">
+        <label for="preciounitario">preciounitario</label>
+        <input type="text" class="form-control" th:field="*{preciounitario}">
+        <div class="text-danger" th:if="${#fields.hasErrors('preciounitario')}" th:errors="*{preciounitario}"></div>
+    </div>
+    <div class="form-group">
+        <label for="descripcion">descripcion</label>
+        <input type="text" class="form-control" th:field="*{descripcion}">
+        <div class="text-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+    </div>
+    <div class="form-group">
+        <label for="stock">stock</label>
+        <input type="text" class="form-control" th:field="*{stock}">
+        <div class="text-danger" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></div>
+    </div>
+    <div class="form-group">
+        <label for="foto2">foto2</label>
+        <input type="text" class="form-control" th:field="*{foto2}">
+    </div>
+
+    <a th:href="@{'/gestor/list'}" class="btn btn-danger">Cancelar</a>
+    <button type="submit" class="btn btn-primary" th:text="${producto.codigo==null?'Registrar':'Actualizar'}">Registrar</button>
+</form>
+</body>
+</html>

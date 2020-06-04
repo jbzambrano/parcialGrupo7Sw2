@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar.html :: header( title = 'Productos')"></head>
+<body class="container">
+
+<div th:replace="fragments/navbar.html :: barraPrueba"></div>
+
+
+<div class="container align-content-center">
+    <hr/>
+    <h2>Lista de Productos</h2>
+
+
+
+    <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+    <hr/>
+
+    <form class="form-inline" method="post" th:action="@{'/productos/buscarProductosPorInicioDeNombreOId'}">
+        <div class="form-group">
+            <input name="inicio" type="text" class="form-control mb-4 mr-2" placeholder="Nombre del Producto" />
+        </div>
+
+        <button class="btn btn-primary mb-4" th:href="@{'/productos/listar'}">Refrescar</button>
+    </form>
+    <a class="btn btn-success mt-4 mb-4" th:href="@{'/gestor/newProduct'}">Nueva Producto</a>
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">codigo</th>
+            <th scope="col">nombre</th>
+            <th scope="col">preciounitario</th>
+            <th scope="col">descripcion</th>
+            <th scope="col">stock</th>
+            <th scope="col">cantidadvendido</th>
+
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pro, info : ${productList}">
+            <th th:text="${info.index + 1}" scope="row"></th>
+            <td th:text="${pro.codigo}"></td>
+            <td th:text="${pro.nombre}"></td>
+            <td th:text="${pro.preciounitario}"></td>
+            <td th:text="${pro.descripcion}"></td>
+            <td th:text="${pro.stock}"></td>
+            <td th:text="${pro.cantidadvendido}"></td>
+
+            <td><a class="btn btn-primary" th:href="@{'/gestor/editProducto' + '?id=' + ${pro.codigo}}">Editar</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/gestor/deleteProducto' + '?id=' + ${pro.codigo}}">Borrar</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
