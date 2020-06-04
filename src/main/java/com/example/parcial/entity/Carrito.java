@@ -2,10 +2,11 @@ package com.example.parcial.entity;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="carrito")
-public class Carrito {
+public class Carrito implements Serializable {
 
 
     @Id

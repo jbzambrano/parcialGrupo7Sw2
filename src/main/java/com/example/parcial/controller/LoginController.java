@@ -48,12 +48,17 @@ public class LoginController {
 
 
     @GetMapping(value = "/redirectByRole")
-    public String redirectByRole(Authentication auth) {
+    public String redirectByRole(Authentication auth , HttpSession session) {
         String rol = "";
         for (GrantedAuthority role : auth.getAuthorities()) {
             rol = role.getAuthority();
             break;
         }
+
+        Usuario usuarioLogueado = usuarioRepository.findByCorreo(auth.getName());
+        session.setAttribute("usuario",usuarioLogueado);
+
+
         if (rol.equals("Admin")) {
             return "redirect:/admin";
         } else if (rol.equals("Gestor")) {

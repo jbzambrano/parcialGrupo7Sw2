@@ -70,7 +70,7 @@
             -->
         </div>
         <div sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0">
-            <span th:text="|Bienvenido ${#authentication.name}|" class="text-white bg-dark"></span>
+            <span th:text="|Bienvenido ${session.usuario.nombre} ${session.usuario.apellido}|" class="text-white bg-dark"></span>
             <form th:action="@{/cerrar}" method="post">
                 <input class="btn btn-link text-white bg-dark" type="submit" value="(Cerrar Sesión)"/>
             </form>

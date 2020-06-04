@@ -13,6 +13,12 @@ import java.util.List;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
+
+    public Usuario findByCorreo(String correo);
+
+
+
+
     @Query(value = "select * from usuario where idRol = ?1",
             nativeQuery = true)
     List<Usuario> listaGestores(Integer idrol);

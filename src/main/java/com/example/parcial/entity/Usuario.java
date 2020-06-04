@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="usuario")
-public class Usuario {
+public class Usuario implements Serializable{
 
     @Id
     @Digits(integer=8,fraction=0,message="El parámetro ha ingresar debe de tener 8 digitos numéricos")
