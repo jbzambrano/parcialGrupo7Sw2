@@ -5,15 +5,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-@RequestMapping("/login")
+@RequestMapping("")
 @Controller
 public class LoginController {
 
 
-    @GetMapping(value="/inicioSesion")
+    @GetMapping(value="loginForm")
     public String loginForm(){
 
-        return "open/index";
+
+        return "/login/form";
+
     }
 
 }

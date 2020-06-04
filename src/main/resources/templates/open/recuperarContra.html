@@ -21,7 +21,7 @@
                                 <h1 class="h4 text-gray-900 mb-4">Recuperar Contraseña</h1>
                             </div>
                             <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
-                            <form th:action="@{'/productos/guardarNuevaContraseña'}" th:object="${usuario}" method="post" class="user">
+                            <form th:action="@{'/guardarNuevaContraseña'}" th:object="${usuario}" method="post" class="user">
                                 <div class="form-group">
                                     <label class="peque">Correo</label>
                                     <input type="email" class="form-control-log form-control-user2" name="correo" id="correo">

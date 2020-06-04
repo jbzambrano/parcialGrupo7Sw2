@@ -27,7 +27,7 @@ import java.util.Optional;
 import java.util.Properties;
 
 
-@RequestMapping("/productos")
+@RequestMapping("")
 @Controller
 public class HomeController {
 
@@ -38,7 +38,7 @@ public class HomeController {
     @Autowired
     ProductoRepository productoRepository;
 
-    @GetMapping(value = {"", "/"})
+    @GetMapping(value = {"/productos"})
     public String listaProductos(Model model) {
         model.addAttribute("listaProductos", productoRepository.findAll());
         return "open/listaProductos";
@@ -84,10 +84,10 @@ public class HomeController {
                     e.printStackTrace();
                 }
                 attr.addFlashAttribute("msg", "Se le ha enviado a su correo una nueva contraseña");
-                return "redirect:/productos/recuperarContra";
+                return "redirect:/recuperarContra";
             } else {
                 attr.addFlashAttribute("msg", "El correo no existe en la base de datos");
-                return "redirect:/productos/recuperarContra";
+                return "redirect:/recuperarContra";
             }
         }
 
@@ -132,7 +132,7 @@ public class HomeController {
                     if (password.equals(password1)){
                         usuarioRepository.guardarRegistrados(usuario.getDni(), usuario.getNombre(), usuario.getApellido(), usuario.getCorreo(), usuario.getPassword());
                         System.out.println(usuario.getDni());
-                        return "redirect:/productos/";
+                        return "redirect:/";
                     }else {
                         model.addAttribute("msg", "Las contraseñas deben ser iguales");
                         return "open/registroRegistrado";
