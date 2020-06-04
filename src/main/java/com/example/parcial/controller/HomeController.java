@@ -1,6 +1,7 @@
 package com.example.parcial.controller;
 
 import com.example.parcial.controller.RandomString;
+import com.example.parcial.entity.Producto;
 import com.example.parcial.entity.Usuario;
 import com.example.parcial.repository.ProductoRepository;
 import com.example.parcial.repository.UsuarioRepository;
@@ -43,6 +44,46 @@ public class HomeController {
         model.addAttribute("listaProductos", productoRepository.findAll());
         return "open/listaProductos";
     }
+    //-------------------- Buscador de Productos FERNANDO--------------
+
+
+    @PostMapping(value ="/buscarProductosPorInicioDeNombreOId")
+    public String listaProductosxNombre(@RequestParam("inicio") String inicio,
+                                        Model model) {
+
+
+        List<Producto> listita = productoRepository.buscarProductosPorInicioDeNombreOId(inicio,inicio);
+
+        model.addAttribute("listaProductos",listita);
+
+        return "open/listaProductos";
+    }
+
+
+    //------------------- FIN Buscador de Productos FERNANDO ------------
+
+
+    //------------------- Detalles de Productos FERNANDO ------------
+
+    @GetMapping("/detalles")
+    public String borrarTransportista(Model model,
+                                      @RequestParam("id") String id,
+                                      RedirectAttributes attr) {
+
+        Optional<Producto> optionalProducto = productoRepository.findById(id);
+
+        Producto producto = optionalProducto.get();
+
+        model.addAttribute("producto",producto);
+
+        return "open/productdetails";
+
+    }
+
+    //------------------- FIN Detalles de Productos FERNANDO ------------
+
+
+
 
 
     //-------------------- RECUPERAR CUENTA --------------

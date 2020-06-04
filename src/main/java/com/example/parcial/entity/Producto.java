@@ -16,18 +16,18 @@ public class Producto {
     private String codigo;
 
     @NotBlank
-    @Size(max = 45)
+    @Size(max = 40)
     private String nombre;
 
-    @Digits(integer = 10, fraction = 4)
+    @Digits(integer = 4, fraction = 2, message = "debe introducir un numero con un maximo de 4 enteros o 2 decimales")
     @Positive
     private Double preciounitario;
 
     @NotBlank
-    @Size(max = 45)
+    @Size(max = 255)
     private String descripcion;
 
-    @Digits(integer = 11, fraction = 0)
+    @Digits(integer = 10, fraction = 0)
     @Positive
     private Integer stock;
     private String foto1;

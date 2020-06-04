@@ -4,9 +4,9 @@
 </head>
 <body class="container">
 <div th:replace="fragments/navbar.html :: barraPrueba"></div>
-<h2 th:text="${producto.codigo==null?'Nuevo Producto':'Editar Producto'}">Nuevo Producto</h2>
+<h2>Editar Producto</h2>
 <hr/>
-<form method="post" th:action="@{'/gestor/saveProduct'}" th:object="${producto}">
+<form method="post" th:action="@{'/gestor/saveProductEdit'}" th:object="${producto}">
 
     <input type="hidden" th:field="*{codigo}" class="form-control">
 
@@ -33,7 +33,7 @@
     <input type="hidden" th:field="*{foto2}" class="form-control">
 
     <a th:href="@{'/gestor/list'}" class="btn btn-danger">Cancelar</a>
-    <button type="submit" class="btn btn-primary" th:text="${producto.codigo==null?'Registrar':'Actualizar'}">Registrar</button>
+    <button type="submit" class="btn btn-primary" >Actualizar</button>
 </form>
 </body>
 </html>
