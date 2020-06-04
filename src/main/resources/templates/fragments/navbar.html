@@ -19,13 +19,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li sec:authorize="hasAuthority('Gestor')" class="nav-item active">
-                <a class="nav-link" th:href="@{'/gestor/list'}">Productos <span class="sr-only">(current)</span></a>
+                <a class="nav-link text-white bg-dark" th:href="@{'/gestor/list'}">Productos <span class="sr-only">(current)</span></a>
             </li>
             <li sec:authorize="hasAuthority('Admin')" class="nav-item">
-                <a class="nav-link" th:href="@{'/admin'}">Gestores</a>
+                <a class="nav-link text-white bg-dark" th:href="@{'/admin'}">Gestores</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white bg-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Dropdown
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -36,28 +36,31 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+                <a class="nav-link disabled text-white bg-dark" href="#">Disabled</a>
             </li>
             <li sec:authorize="hasAuthority('Gestor')" class="nav-item">
-                <a class="nav-link" href="#">Estadisticas para Gestores</a>
+                <a class="nav-link text-white bg-dark" href="#">Estadisticas para Gestores</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{'/productos/lista'}">Productos Publico</a>
+                <a class="nav-link text-white bg-dark" th:href="@{'/productos/lista'}">Productos Publico</a>
             </li>
 
         </ul>
 
         <div class="form-inline my-2 my-lg-0 ">
-            <a class="nav-link" href="#">Carrito</a>
+            <a class="nav-link text-white bg-dark" href="#">Carrito</a>
         </div>
 
         <div sec:authorize="isAnonymous()" class="form-inline my-2 my-lg-0">
+            <a class="nav-link text-white bg-dark" th:href="@{/loginForm}">Iniciar Sesión</a>
+            <!--
             <a class="nav-link" th:href="@{/loginForm}">Iniciar Sesión</a>
+            -->
         </div>
         <div sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0">
-            <span th:text="|Bienvenido ${#authentication.name}|"></span>
+            <span th:text="|Bienvenido ${#authentication.name}|" class="text-white bg-dark"></span>
             <form th:action="@{/cerrar}" method="post">
-                <input class="btn btn-link" type="submit" value="(Cerrar Sesión)"/>
+                <input class="btn btn-link text-white bg-dark" type="submit" value="(Cerrar Sesión)"/>
             </form>
         </div>
 
