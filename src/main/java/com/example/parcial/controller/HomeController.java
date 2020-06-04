@@ -109,7 +109,8 @@ public class HomeController {
 
 
     @PostMapping("guardarUsuario")
-    public String guardarUsuario(@ModelAttribute("usuario") @Valid Usuario usuario,BindingResult bindingResult,
+    public String guardarUsuario(@RequestParam("password") String password,
+                                 @RequestParam("password1") String password1,@ModelAttribute("usuario") @Valid Usuario usuario,BindingResult bindingResult,
                                  Model model, RedirectAttributes attr){
 
         Optional<Usuario> optionalUsuario = usuarioRepository.findById(usuario.getDni());
@@ -127,9 +128,14 @@ public class HomeController {
                     //System.out.println("hola");
                     return "open/registroRegistrado";
                 } else {
-                    usuarioRepository.guardarRegistrados(usuario.getDni(), usuario.getNombre(), usuario.getApellido(), usuario.getCorreo(), usuario.getPassword());
-                    System.out.println(usuario.getDni());
-                    return "redirect:/open/listaProductos";
+                    if (password.equals(password1)){
+                        usuarioRepository.guardarRegistrados(usuario.getDni(), usuario.getNombre(), usuario.getApellido(), usuario.getCorreo(), usuario.getPassword());
+                        System.out.println(usuario.getDni());
+                        return "redirect:/productos/";
+                    }else {
+                        model.addAttribute("msg", "Las contraseñas deben ser iguales");
+                        return "open/registroRegistrado";
+                    }
                 }
             }
         }
