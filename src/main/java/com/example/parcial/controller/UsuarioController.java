@@ -38,10 +38,6 @@ public class UsuarioController {
     @Autowired
     PagoRepository pagoRepository;
 
-    @GetMapping("carrito")
-    public String irCarrito(){
-        return "registrados/carrito";
-    }
 
     @GetMapping("checkout")
     public String irCheckout(Model model,
