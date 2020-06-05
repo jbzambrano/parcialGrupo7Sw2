@@ -191,6 +191,12 @@ public class GestorController {
     }
     */
 
+    @GetMapping("/olig")
+    public String estadistica7(Model model){
+        model.addAttribute("olig", usuarioRepository.usuarioOligarcaDto());
+        return "estadisticas/masolig";
+    }
+
 
 
 
