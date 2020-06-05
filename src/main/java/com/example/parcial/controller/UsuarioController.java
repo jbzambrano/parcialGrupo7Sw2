@@ -47,7 +47,7 @@ public class UsuarioController {
         Carrito carrito = (Carrito) session.getAttribute("carritoSesion");
         Integer idCar = carrito.getIdcarrito();
 
-        model.addAttribute("carritoAPagar",carrito);
+        model.addAttribute("carrito",carrito);
         model.addAttribute("idCarrito",idCar);
 
         return "registrados/checkout";
@@ -68,26 +68,23 @@ public class UsuarioController {
         if(elementosPedidos.size()==0){
 
             attr.addFlashAttribute("msgredun", "Aun No Existen Pedidos Pasados");
-            model.addAttribute("pedidos", elementosPedidos);
-
             return "registrados/pedidos";
 
         }else{
-            model.addAttribute("pedidos", elementosPedidos);
+            model.addAttribute("elementosPedidos", elementosPedidos);
             return "registrados/pedidos";
         }
 
     }
 
     @PostMapping("pagar")
-    public String pagarCheckout(@RequestParam("tarjeta") Integer tarjeta,
-                                Model model, BindingResult bindingResult,
+    public String pagarCheckout(@RequestParam("tarjeta") Integer tarjeta,Model model,
+                                @ModelAttribute("pagox") @Valid Pago pagox, BindingResult bindingResult,
                                 RedirectAttributes attr, Authentication auth,
                                 HttpSession session) throws ParseException {
 
         if (bindingResult.hasErrors()){
             return "registrados/checkout";
-
         } else{
             int validado = RandomString.validarTarjeta(tarjeta);
             if(validado ==1){
@@ -139,10 +136,20 @@ public class UsuarioController {
 
     @GetMapping("buscadorPedidos")
     public String buscadorNumeroPedidos(Model model,
-                                        RedirectAttributes attr,@RequestParam("nombrePedido") String nombrePedido,
-                                        HttpSession session){
+                                        RedirectAttributes attr,@RequestParam("nombrePedido") String nombrePedido){
 
-        return "registrados/pedidos";
+        List<Pago> pedidosBuscados = pagoRepository.buscadorDePedidos(nombrePedido);
+        if(pedidosBuscados.size()==0){
+
+            attr.addFlashAttribute("msg", "No existen pedidos que coincidan con la busqueda");
+            return "registrados/pedidos";
+
+        }else{
+            model.addAttribute("pedidosBuscados", pedidosBuscados);
+
+            return "registrados/pedidos";
+        }
+
 
     }
 
