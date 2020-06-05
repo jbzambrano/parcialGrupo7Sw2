@@ -5,6 +5,7 @@ import com.example.parcial.entity.Carrito;
 import com.example.parcial.entity.Pago;
 import com.example.parcial.entity.Usuario;
 import com.example.parcial.repository.CarritoRepository;
+import com.example.parcial.repository.PagoRepository;
 import com.example.parcial.repository.UsuarioRepository;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,9 @@ import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Controller
@@ -34,6 +37,8 @@ public class UsuarioController {
     @Autowired
     CarritoRepository carritoRepository;
 
+    @Autowired
+    PagoRepository pagoRepository;
 
     @GetMapping("carrito")
     public String irCarrito(){
@@ -66,8 +71,6 @@ public class UsuarioController {
             if(validado ==1){
                 //Se opera el pago
 
-                String texto = "PE";
-
                 Date fecha = new Date();
                 SimpleDateFormat parseador = new SimpleDateFormat("dd-MM-yyyy");
                 String fechaString = fecha.toString();
@@ -78,16 +81,23 @@ public class UsuarioController {
                 Carrito carrito = (Carrito) session.getAttribute("carritoSesion");
                 Integer idCar = carrito.getIdcarrito();
 
-                Pago pagoSession = new Pago();
-                pagoSession.setFecha(fechaParseada);
-                pagoSession.setTarjeta(tarjeta);
-                pagoSession.setDni(dni);
+                Pago pago = new Pago();
+                pago.setFecha(fechaParseada);
+                pago.setTarjeta(tarjeta);
+                pago.setDni(dni);
+                pago.setCarrito(carrito);
 
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(fecha);
 
+                int año = calendar.get(Calendar.YEAR);
+                int mes = calendar.get(Calendar.MONTH)+1;
+                int dia = calendar.get(Calendar.DAY_OF_MONTH);
 
+                String idPedido= "PE" + dia + mes + año + carrito.getIdcarrito();
+                pago.setIdpedido(idPedido);
 
-
-
+                pagoRepository.save(pago);
                 attr.addFlashAttribute("msg", "Se ha registrado el pago correctamente, disfrute su compra");
                 return "redirect:/registrados/checkout";
             } else if (validado == 0) {
