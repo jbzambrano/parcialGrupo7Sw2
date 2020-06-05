@@ -53,8 +53,7 @@ public class UsuarioController {
     }
 
     @PostMapping("pagar")
-    public String pagarCheckout(@RequestParam("tarjeta") Integer tarjeta, @ModelAttribute("usuario") @Valid Usuario usuario,
-                                @ModelAttribute("carrito") @Valid Carrito carrito,
+    public String pagarCheckout(@RequestParam("tarjeta") Integer tarjeta,
                                 Model model, BindingResult bindingResult,
                                 RedirectAttributes attr, Authentication auth,
                                 HttpSession session) throws ParseException {
@@ -74,14 +73,16 @@ public class UsuarioController {
                 String fechaString = fecha.toString();
                 Date fechaParseada = parseador.parse(fechaString);
 
-                Usuario usuarioLogueado = usuarioRepository.findByCorreo(auth.name());
-
-                session.setAttribute("usuario",usuarioLogueado);
-
+                Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
+                Integer dni = usuarioLogueado.getDni();
+                Carrito carrito = (Carrito) session.getAttribute("carritoSesion");
+                Integer idCar = carrito.getIdcarrito();
 
                 Pago pagoSession = new Pago();
                 pagoSession.setFecha(fechaParseada);
                 pagoSession.setTarjeta(tarjeta);
+                pagoSession.setDni(dni);
+
 
 
 
