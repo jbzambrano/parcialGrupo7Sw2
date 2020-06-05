@@ -20,5 +20,8 @@ public interface PagoRepository extends JpaRepository<Pago, Integer> {
     @Query(value="SELECT * FROM parcial.pago WHERE dni=?1", nativeQuery=true)
     List<Pago> obtenerPorDni(Integer dni);
 
+    @Query(value="select * FROM pago WHERE idPedido LIKE %?1%", nativeQuery=true)
+    List<Pago> buscadorDePedidos(String nombre);
+
 
 }

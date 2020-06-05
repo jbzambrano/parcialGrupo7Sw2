@@ -137,5 +137,14 @@ public class UsuarioController {
 
     }
 
+    @GetMapping("buscadorPedidos")
+    public String buscadorNumeroPedidos(Model model,
+                                        RedirectAttributes attr,@RequestParam("nombrePedido") String nombrePedido,
+                                        HttpSession session){
+
+        return "registrados/pedidos";
+
+    }
+
 
 }
