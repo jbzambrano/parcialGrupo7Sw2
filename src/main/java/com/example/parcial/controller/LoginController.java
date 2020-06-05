@@ -87,7 +87,7 @@ public class LoginController {
     }
 
     @PostMapping("guardarNuevaContraseña")
-    public String guardarNuevaContraseña(@RequestParam("correo") String correo, @ModelAttribute("usuario") Usuario usuario,
+    public String guardarNuevaContraseña(@RequestParam("correo") String correo, @ModelAttribute("usuario") @Valid Usuario usuario,
                                          Model model, BindingResult bindingResult,
                                          RedirectAttributes attr){
 
