@@ -83,6 +83,8 @@ public class CarritoController {
 
         List<ElementosDelCarritoDto> elementosDelCarritoDtos = carritoRepository.elementosDelCarritoDto(idCar);
 
+        Double totalCarrito = carritoRepository.totalCarritoDto(idCar);
+
         if(elementosDelCarritoDtos.size()==0){
 
             attr.addFlashAttribute("msgredun", "Aun No Existen Elementos En Tu Carrito");
@@ -92,6 +94,7 @@ public class CarritoController {
 
         }else{
             model.addAttribute("elementos", elementosDelCarritoDtos);
+            model.addAttribute("totalCarrito", totalCarrito);
 
             return "registrados/carrito";
         }
