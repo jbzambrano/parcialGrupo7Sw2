@@ -1,8 +1,10 @@
 package com.example.parcial.controller;
 
 
+import com.example.parcial.entity.Carrito;
 import com.example.parcial.entity.Pago;
 import com.example.parcial.entity.Usuario;
+import com.example.parcial.repository.CarritoRepository;
 import com.example.parcial.repository.UsuarioRepository;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class UsuarioController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    CarritoRepository carritoRepository;
+
 
     @GetMapping("carrito")
     public String irCarrito(){
@@ -49,6 +54,7 @@ public class UsuarioController {
 
     @PostMapping("pagar")
     public String pagarCheckout(@RequestParam("tarjeta") Integer tarjeta, @ModelAttribute("usuario") @Valid Usuario usuario,
+                                @ModelAttribute("carrito") @Valid Carrito carrito,
                                 Model model, BindingResult bindingResult,
                                 RedirectAttributes attr, Authentication auth,
                                 HttpSession session) throws ParseException {
@@ -69,7 +75,9 @@ public class UsuarioController {
                 Date fechaParseada = parseador.parse(fechaString);
 
                 Usuario usuarioLogueado = usuarioRepository.findByCorreo(auth.name());
+
                 session.setAttribute("usuario",usuarioLogueado);
+
 
                 Pago pagoSession = new Pago();
                 pagoSession.setFecha(fechaParseada);
