@@ -24,7 +24,12 @@
     </form>
     -->
 
+    <!--
     <h1 class="card-text" th:text="${'Costo Total : ' + totalCarrito}">Mi Carrito</h1>
+    -->
+
+    <h1 class="card-text" th:text="|Costo Total ${session.carritoSesion.total}|">Mi Carrito</h1>
+
 
     <div th:each="ec, info : ${elementos}">
         <div class="card container">

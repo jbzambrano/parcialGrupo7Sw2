@@ -85,6 +85,11 @@ public class CarritoController {
 
         Double totalCarrito = carritoRepository.totalCarritoDto(idCar);
 
+
+        carrito.setTotal(totalCarrito);
+
+        session.setAttribute("carritoSesion",carrito);
+
         if(elementosDelCarritoDtos.size()==0){
 
             attr.addFlashAttribute("msgredun", "Aun No Existen Elementos En Tu Carrito");
