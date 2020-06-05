@@ -142,7 +142,18 @@ public class UsuarioController {
                                         RedirectAttributes attr,@RequestParam("nombrePedido") String nombrePedido,
                                         HttpSession session){
 
-        return "registrados/pedidos";
+        List<Pago> pedidosBuscados = pagoRepository.buscadorDePedidos(nombrePedido);
+        if(pedidosBuscados.size()==0){
+
+            attr.addFlashAttribute("msg", "No existen pedidos que coincidan con la busqueda");
+            return "registrados/pedidos";
+
+        }else{
+            model.addAttribute("pedidosBuscados", pedidosBuscados);
+
+            return "registrados/pedidos";
+        }
+
 
     }
 
