@@ -1,5 +1,6 @@
 package com.example.parcial.repository;
 
+import com.example.parcial.dto.UsuarioOligarcaDto;
 import com.example.parcial.entity.Producto;
 import com.example.parcial.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -36,6 +37,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     @Query (value="call guardarRegistrados(?1, ?2, ?3, ?4,?5)", nativeQuery=true)
     List <Usuario> guardarRegistrados(Integer dni, String nombre,String apellido,String correo,String password);
+
+
+    @Query (value="SELECT max(sumita) AS \"maximo\",dni FROM (SELECT sum(pxc.subtotal) AS \"sumita\", c.dni FROM parcial.productoxcarrito pxc, parcial.carrito c, parcial.pago pag WHERE pxc.idCarrito = c.idCarrito AND pag.idCarrito = c.idCarrito GROUP BY c.dni) es", nativeQuery=true)
+    List <UsuarioOligarcaDto> usuarioOligarcaDto();
+
 
 
 

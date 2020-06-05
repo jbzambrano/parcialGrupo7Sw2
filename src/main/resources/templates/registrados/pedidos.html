@@ -12,6 +12,24 @@
     <h2>Mis Pedidos</h2>
     <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
     <hr/>
+    <div th:each="pedidos, info : ${elementosPedidos}">
+        <div class="card container">
+
+            <div class="card-body row">
+                <div class="col-lg-4">
+                    <h5 class="card-title" th:text="${pedidos.getIdpedido()}"></h5>
+                    <p class="card-text" th:text="${'Fecha : ' + pedidos.getFecha()}"></p>
+
+                </div>
+                <div class="col-lg-4">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
 
 </body>
 </html>

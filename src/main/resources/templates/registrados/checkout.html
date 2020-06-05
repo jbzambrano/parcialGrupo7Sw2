@@ -26,8 +26,31 @@
                                 </div>
                                 <div th:if="${msg != null}" th:text="${msg}" class="alert alert-danger" role="alert"></div>
 
-                                <h1>AQUI VA EL INPUT PARA LA TARJETA Y EL BOTON PAGAR </h1>
+                                <div class="text-center">
+                                    <h1 th:text="|Total a pagar ${session.carritoSesion.total}|">Total a pagar: </h1>
+                                </div>
 
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Datos de pago:</h1>
+                                    </div>
+                                    <div th:if="${msg != null}" th:text="${msg}" class="alert alert-danger" role="alert"></div>
+                                    <form method="post" th:action="@{'/usuario/pagar'}" th:object="${pagox}">
+                                        <div class="form-group">
+                                            <label for="tarjeta">Tarjeta de Crédito:</label>
+                                            <input type="text" class="form-control" th:field="*{tarjeta}"/>
+                                            <div class="text-danger" th:if="${#fields.hasErrors('tarjeta')}" th:errors="*{tarjeta}">Error</div>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="d-flex">
+                                            <button type="submit" class="btn btn-primary  btn-user btn-block" >
+                                                Registrar
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
 
                             </div>
                         </div>
