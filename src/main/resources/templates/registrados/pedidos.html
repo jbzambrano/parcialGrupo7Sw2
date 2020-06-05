@@ -12,6 +12,15 @@
     <h2>Mis Pedidos</h2>
     <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
     <hr/>
+
+    <form class="form-inline" method="post" th:action="@{'/usuarios/buscadorPedidos'}">
+        <div class="form-group">
+            <input name="inicio" type="text" class="form-control mb-4 mr-2" placeholder="Nombre del Pedido" />
+        </div>
+
+        <button class="btn btn-primary mb-4" th:href="@{'/usuarios/listarpedidos'}">Refrescar</button>
+    </form>
+
     <div th:each="pedidos, info : ${elementosPedidos}">
         <div class="card container">
 
