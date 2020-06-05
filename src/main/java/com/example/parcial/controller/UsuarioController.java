@@ -1,6 +1,7 @@
 package com.example.parcial.controller;
 
 
+import com.example.parcial.dto.ElementosDelCarritoDto;
 import com.example.parcial.entity.Carrito;
 import com.example.parcial.entity.Pago;
 import com.example.parcial.entity.Usuario;
@@ -22,10 +23,7 @@ import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("usuario")
@@ -46,15 +44,43 @@ public class UsuarioController {
     }
 
     @GetMapping("checkout")
-    public String irCheckout(){
+    public String irCheckout(Model model,
+                             RedirectAttributes attr,
+                             HttpSession session){
+
+        Carrito carrito = (Carrito) session.getAttribute("carritoSesion");
+        Integer idCar = carrito.getIdcarrito();
+
+        model.addAttribute("carritoAPagar",carrito);
+        model.addAttribute("idCarrito",idCar);
 
         return "registrados/checkout";
     }
 
-    @GetMapping("pedidos")
-    public String irPedidos(){
+    @GetMapping("listarpedidos")
+    public String listaPedidos(Model model,
+                               RedirectAttributes attr,
+                               HttpSession session){
 
-        return "registrados/pedidos";
+        Pago pagoPedido = (Pago) session.getAttribute("pago");
+        Integer dni = pagoPedido.getDni();
+
+
+        List <Pago> elementosPedidos = pagoRepository.obtenerPorDni(dni);
+
+
+        if(elementosPedidos.size()==0){
+
+            attr.addFlashAttribute("msgredun", "Aun No Existen Pedidos Pasados");
+            model.addAttribute("pedidos", elementosPedidos);
+
+            return "registrados/pedidos";
+
+        }else{
+            model.addAttribute("pedidos", elementosPedidos);
+            return "registrados/pedidos";
+        }
+
     }
 
     @PostMapping("pagar")
@@ -98,7 +124,8 @@ public class UsuarioController {
                 pago.setIdpedido(idPedido);
 
                 pagoRepository.save(pago);
-                attr.addFlashAttribute("msg", "Se ha registrado el pago correctamente, disfrute su compra");
+                session.setAttribute("pago",pago);
+                attr.addFlashAttribute("msg", "Compra exitosa, disfrute sus productos");
                 return "redirect:/registrados/checkout";
             } else if (validado == 0) {
                 //No se opera el pago
