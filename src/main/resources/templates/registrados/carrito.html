@@ -39,15 +39,10 @@
 
                     <p class="card-text" th:text="${'Unidades Ordenadas : ' + ec.getCantidad()}">Descripción</p>
 
-
-
                 </div>
                 <div class="col-lg-4">
                     <pre>
                     </pre>
-                    <div class="row">
-                        <a class="btn btn-success">Agregar al carrito</a>
-                    </div>
                     <pre>
                     </pre>
                     <div class="row">
@@ -74,7 +69,17 @@
 
     </div>
 
-</div>
+    <div class="card container">
+
+        <div class="card-body row">
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-4">
+                <h1>Total:</h1>
+                <a th:href="@{'/usuario/checkout'}" class="btn btn-info mr-2">Proceder a pagar</a>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
