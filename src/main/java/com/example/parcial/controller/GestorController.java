@@ -155,7 +155,7 @@ public class GestorController {
                                       @RequestParam("id") String id,
                                       RedirectAttributes attr) {
 
-        List <Productoxcarrito> listaProductoxCarrito =  productoxcarritoRepository.verificarSiYaTengoElProductoEnElCarrito(id);
+        //List <Productoxcarrito> listaProductoxCarrito =  productoxcarritoRepository.verificarSiYaTengoElProductoEnElCarrito(id);
 
         Optional<Producto> optProduct = productoRepository.findById(id);
 
