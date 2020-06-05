@@ -1,10 +1,9 @@
 package com.example.parcial.controller;
 
+import com.example.parcial.entity.Carrito;
 import com.example.parcial.entity.Producto;
-import com.example.parcial.repository.CarritoRepository;
-import com.example.parcial.repository.PagoRepository;
-import com.example.parcial.repository.ProductoRepository;
-import com.example.parcial.repository.UsuarioRepository;
+import com.example.parcial.entity.Productoxcarrito;
+import com.example.parcial.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +31,9 @@ public class GestorController {
 
     @Autowired
     PagoRepository pagoRepository;
+
+    @Autowired
+    ProductoxcarritoRepository productoxcarritoRepository;
 
     @GetMapping(value = {"/list", ""})
     public String listarProductos(Model model) {
@@ -146,6 +149,24 @@ public class GestorController {
             return "redirect:/gestor/list";
         }
     }
+
+    @GetMapping("/deleteProducto")
+    public String borrarProducto(Model model,
+                                      @RequestParam("id") String id,
+                                      RedirectAttributes attr) {
+
+        List <Productoxcarrito> listaProductoxCarrito =  productoxcarritoRepository.verificarSiYaTengoElProductoEnElCarrito(id);
+
+        Optional<Producto> optProduct = productoRepository.findById(id);
+
+        if (optProduct.isPresent()) {
+            productoRepository.deleteById(id);
+            attr.addFlashAttribute("msg", "Producto borrado exitosamente");
+        }
+        return "redirect:/product";
+
+    }
+
 
     @GetMapping("/estadistica1")
     public String estadistica1(Model model){

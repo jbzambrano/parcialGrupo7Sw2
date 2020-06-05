@@ -13,8 +13,8 @@ import java.util.List;
 @Repository
 public interface ProductoxcarritoRepository extends JpaRepository<Productoxcarrito, Integer> {
 
-    @Query(value = "SELECT * FROM parcial.productoxcarrito WHERE codigo = ?1 AND idCarrito = ?2", nativeQuery = true)
-    List<Productoxcarrito> verificarSiYaTengoElProductoEnElCarrito(String codigo, Integer idCarrito);
+    @Query(value = "SELECT * FROM parcial.productoxcarrito WHERE codigo = ?1", nativeQuery = true)
+    List<Productoxcarrito> verificarSiYaTengoElProductoEnElCarrito(String codigo);
 
 
 }
