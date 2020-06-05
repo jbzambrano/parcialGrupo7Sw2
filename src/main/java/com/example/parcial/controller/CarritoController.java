@@ -85,7 +85,8 @@ public class CarritoController {
 
         if(elementosDelCarritoDtos.size()==0){
 
-            attr.addFlashAttribute("msg", "Aun No Existen Elementos En Tu Carrito");
+            attr.addFlashAttribute("msgredun", "Aun No Existen Elementos En Tu Carrito");
+            model.addAttribute("elementos", elementosDelCarritoDtos);
 
             return "registrados/carrito";
 
@@ -199,16 +200,20 @@ public class CarritoController {
             attr.addFlashAttribute("msgredun", "La Cantidad a Elegir Debe estar entre 1 y 4");
 
             return "redirect:/productos/lista";
-
-
         }
+    }
 
+    @GetMapping("/borrar")
+    public String borrar(Model model, Integer idpxc,
+                          RedirectAttributes attr,
+                          HttpSession session) {
 
-
-
-
-
-
+        productoxcarritoRepository.deleteById(idpxc);
+        attr.addFlashAttribute("msg","Elemento Borrado Del Carrito Exitosamente");
+        return "redirect:/productos/lista";
 
     }
+
+
+
 }

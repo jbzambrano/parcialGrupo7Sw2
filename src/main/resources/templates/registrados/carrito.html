@@ -46,21 +46,11 @@
                     <pre>
                     </pre>
                     <div class="row">
-                        <a class="btn btn-success">Agregar al carrito</a>
+                        <a class="btn btn-success" th:href="@{'/carrito/borrar' + '?idpxc=' + ${ec.getIdproductoxcarrito()}}">Borrar</a>
                     </div>
                     <pre>
                     </pre>
-                    <div class="row">
-                        <a class="btn btn-primary">Detalles</a>
-                    </div>
-                    <pre>
-                    </pre>
-                    <select name="select" >
-                        <option value=1>1</option>
-                        <option value=2 selected>2</option>
-                        <option value=3>3</option>
-                        <option value=4>4</option>
-                    </select>
+
 
 
                 </div>
