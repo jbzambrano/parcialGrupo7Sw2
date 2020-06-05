@@ -24,8 +24,12 @@
     </form>
     -->
 
+    <h1 class="card-text" th:text="${'Costo Total : ' + totalCarrito}">Mi Carrito</h1>
+
     <div th:each="ec, info : ${elementos}">
         <div class="card container">
+
+
 
             <div class="card-body row">
                 <div class="col-lg-4">
@@ -38,6 +42,8 @@
                     <p class="card-text" th:text="${'Stock : ' + ec.getDescripcion()}">Descripción</p>
 
                     <p class="card-text" th:text="${'Unidades Ordenadas : ' + ec.getCantidad()}">Descripción</p>
+
+
 
                 </div>
                 <div class="col-lg-4">

@@ -28,5 +28,8 @@ public interface CarritoRepository extends JpaRepository<Carrito, Integer> {
     @Query(value="SELECT pxc.idProductoxCarrito, pxc.codigo AS \"cod\", pxc.cantidad, pxc.subtotal, p.nombre AS \"nom\", p.precioUnitario, p.descripcion, p.stock AS \"st\", p.foto2 FROM parcial.productoxcarrito pxc, parcial.producto p WHERE pxc.codigo = p.codigo AND pxc.idCarrito = ?1 AND p.nombre LIKE %?2%", nativeQuery=true)
     List<ElementosCarritoPorPedazoDeNombreDto> elementosCarritoPorPedazoDeNombreDto(Integer idCarrito,String nombre);
 
+    @Query(value="SELECT  sum(subtotal) AS \"suma\" FROM parcial.productoxcarrito pxc, parcial.producto p WHERE pxc.codigo = p.codigo AND pxc.idCarrito = ?1", nativeQuery=true)
+    Double totalCarritoDto(Integer idCarrito);
+
 
 }
