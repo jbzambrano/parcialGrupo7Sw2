@@ -14,16 +14,22 @@
 
     <table class="table table-sm">
         <tr>
+            <th>Codigo</th>
             <th>Nombre</th>
             <th>Precio Unitario</th>
             <th>Descripcion</th>
+            <th>Stock</th>
             <th>Cantidad de Vendidos</th>
+            <th>Cuantos quedan</th>
         </tr>
         <tr th:each="producto ,info : ${productoMenosVendido}">
+            <td th:text="${producto.getCodigo()}">
             <td th:text="${producto.getNombre()}">
             <td th:text="${producto.getPreciounitario()}">
             <td th:text="${producto.getDescripcion()}">
+            <td th:text="${producto.getStock()}">
             <td th:text="${producto.getCantidadvendido()}">
+            <td th:text="${producto.getValides()}">
         </tr>
     </table>
 

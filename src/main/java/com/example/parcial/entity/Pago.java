@@ -18,6 +18,24 @@ public class Pago {
     @OneToOne
     @JoinColumn(name="idcarrito")
     private Carrito carrito;
+    private String idpedido;
+    private Integer dni;
+
+    public String getIdpedido() {
+        return idpedido;
+    }
+
+    public void setIdpedido(String idpedido) {
+        this.idpedido = idpedido;
+    }
+
+    public Integer getDni() {
+        return dni;
+    }
+
+    public void setDni(Integer dni) {
+        this.dni = dni;
+    }
 
     public Integer getIdpago() {
         return idpago;

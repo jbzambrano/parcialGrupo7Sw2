@@ -71,7 +71,7 @@ public class LoginController {
         } else{
 
             Integer dni = usuarioLogueado.getDni();
-            Double subtotal = 0.0;
+            //Double subtotal = 0.0;
 
             Carrito carritoSesion = new Carrito();
 
@@ -87,7 +87,7 @@ public class LoginController {
     }
 
     @PostMapping("guardarNuevaContraseña")
-    public String guardarNuevaContraseña(@RequestParam("correo") String correo, @ModelAttribute("usuario") Usuario usuario,
+    public String guardarNuevaContraseña(@RequestParam("correo") String correo, @ModelAttribute("usuario") @Valid Usuario usuario,
                                          Model model, BindingResult bindingResult,
                                          RedirectAttributes attr){
 
