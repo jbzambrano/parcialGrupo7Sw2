@@ -9,8 +9,9 @@
     <hr/>
     <h2>Lista de Productos</h2>
     <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
-    <hr/>
+    <div th:if="${msgredun != null}" th:text="${msgredun}" class="alert alert-danger" role="alert"></div>
 
+    <hr/>
     <form class="form-inline" method="post" th:action="@{'/productos/buscarProductosPorInicioDeNombreOId'}">
         <div class="form-group">
             <input name="inicio" type="text" class="form-control mb-4 mr-2" placeholder="Nombre del Producto" />
@@ -33,14 +34,40 @@
                     <p class="card-text" th:text="${'Stock : ' + pro.stock}">Descripción</p>
                 </div>
                 <div class="col-lg-4">
+                    <pre>
+                    </pre>
+                    <!--
                     <div class="row">
-                        <a href="#" class="btn btn-success">Agregar al carrito</a>
+                        <a th:href="@{'/carrito/agregarProducto' + '?codigo=' + ${pro.codigo}}" class="btn btn-success">Agregar al carrito</a>
                     </div>
                     <pre>
                     </pre>
+                    -->
                     <div class="row">
                         <a th:href="@{'/productos/detalles' + '?id=' + ${pro.codigo}}" class="btn btn-primary">Detalles</a>
                     </div>
+                    <pre>
+                    </pre>
+
+                    <!--
+                    <select id="combobox" >
+                        <option th:each="i:${combobox}" th:value="${i}" th:text="${i}">1</option>
+                    </select>
+                    -->
+
+                    <form method="post" th:action="@{'/carrito/agregar'}">
+
+                        <input type="hidden" th:value="${pro.codigo}" name="codigo" id="codigo" class="form-control" >
+
+                        <div class="form-group">
+                            <label for="i">Cantidad Elegida</label>
+                            <input type="number" name="i" id="i">
+                        </div>
+                        <button type="submit" class="btn btn-success" >Añadir</button>
+                    </form>
+
+
+
                 </div>
 
             </div>

@@ -1,5 +1,7 @@
 package com.example.parcial.repository;
 
+import com.example.parcial.dto.ElementosCarritoPorPedazoDeNombreDto;
+import com.example.parcial.dto.ElementosDelCarritoDto;
 import com.example.parcial.dto.comprasCarritoDto;
 import com.example.parcial.dto.facturasDto;
 import com.example.parcial.entity.Carrito;
@@ -19,7 +21,12 @@ public interface CarritoRepository extends JpaRepository<Carrito, Integer> {
     List<facturasDto> totalFacturado();
 
 
+    @Query(value="SELECT pxc.idProductoxCarrito, pxc.codigo AS \"cod\", pxc.cantidad, pxc.subtotal, p.nombre AS \"nom\", p.precioUnitario, p.descripcion, p.stock AS \"st\", p.foto2 FROM parcial.productoxcarrito pxc, parcial.producto p WHERE pxc.codigo = p.codigo AND pxc.idCarrito = ?1", nativeQuery=true)
+    List<ElementosDelCarritoDto> elementosDelCarritoDto(Integer idCarrito);
 
+
+    @Query(value="SELECT pxc.idProductoxCarrito, pxc.codigo AS \"cod\", pxc.cantidad, pxc.subtotal, p.nombre AS \"nom\", p.precioUnitario, p.descripcion, p.stock AS \"st\", p.foto2 FROM parcial.productoxcarrito pxc, parcial.producto p WHERE pxc.codigo = p.codigo AND pxc.idCarrito = ?1 AND p.nombre LIKE %?2%", nativeQuery=true)
+    List<ElementosCarritoPorPedazoDeNombreDto> elementosCarritoPorPedazoDeNombreDto(Integer idCarrito,String nombre);
 
 
 }
