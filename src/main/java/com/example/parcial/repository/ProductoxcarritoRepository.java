@@ -16,4 +16,5 @@ public interface ProductoxcarritoRepository extends JpaRepository<Productoxcarri
     @Query(value = "SELECT * FROM parcial.productoxcarrito WHERE codigo = ?1 AND idCarrito = ?2", nativeQuery = true)
     List<Productoxcarrito> verificarSiYaTengoElProductoEnElCarrito(String codigo, Integer idCarrito);
 
+
 }

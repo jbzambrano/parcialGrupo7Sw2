@@ -60,7 +60,7 @@
         </ul>
 
         <div class="form-inline my-2 my-lg-0 ">
-            <a class="nav-link text-white bg-dark" href="#">Carrito</a>
+            <a class="nav-link text-white bg-dark" th:href="@{/carrito/lista}">Carrito</a>
         </div>
 
         <div sec:authorize="isAnonymous()" class="form-inline my-2 my-lg-0">

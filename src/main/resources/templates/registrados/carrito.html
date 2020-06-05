@@ -1,16 +1,80 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" >
-<head th:replace="fragments/navbar.html :: header( title = 'Carrito')"></head>
-
-
+<head th:replace="fragments/navbar.html :: header( title = 'Productos')"></head>
 <body class="container" >
 
 <div th:replace="fragments/navbar.html :: barraPrueba"></div>
 
 <div class="container align-content-center">
     <hr/>
-    <h2>Carrito</h2>
+    <h2>Mi Carrito</h2>
     <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
     <hr/>
+
+    <div th:if="${msgredun != null}" th:text="${msgredun}" class="alert alert-danger" role="alert"></div>
+
+    <hr/>
+    <!--
+    <form class="form-inline" method="post" th:action="@{'/productos/buscarProductosPorInicioDeNombreOId'}">
+        <div class="form-group">
+            <input name="inicio" type="text" class="form-control mb-4 mr-2" placeholder="Nombre del Producto" />
+        </div>
+
+        <button class="btn btn-primary mb-4" th:href="@{'/productos/lista'}">Refrescar</button>
+    </form>
+    -->
+
+    <div th:each="ec, info : ${elementos}">
+        <div class="card container">
+
+            <div class="card-body row">
+                <div class="col-lg-4">
+                    <img class="thumb" th:src="${ec.getFoto2()}" alt="obligamePerro " width="300" height="200" data-pin-no-hover="true">
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="card-title" th:text="${ec.getNom()}"></h5>
+                    <p class="card-text" th:text="${'Codigo : ' + ec.getCod()}">Descripción</p>
+                    <p class="card-text" th:text="${'Precio : ' + ec.getPreciounitario()}">Descripción</p>
+                    <p class="card-text" th:text="${'Stock : ' + ec.getDescripcion()}">Descripción</p>
+
+                    <p class="card-text" th:text="${'Unidades Ordenadas : ' + ec.getCantidad()}">Descripción</p>
+
+
+
+                </div>
+                <div class="col-lg-4">
+                    <pre>
+                    </pre>
+                    <div class="row">
+                        <a class="btn btn-success">Agregar al carrito</a>
+                    </div>
+                    <pre>
+                    </pre>
+                    <div class="row">
+                        <a class="btn btn-primary">Detalles</a>
+                    </div>
+                    <pre>
+                    </pre>
+                    <select name="select" >
+                        <option value=1>1</option>
+                        <option value=2 selected>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                    </select>
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <pre>
+
+        </pre>
+
+    </div>
+
+</div>
+
 </body>
 </html>

@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
@@ -41,7 +42,16 @@ public class ProductoController {
 
     @GetMapping(value = {"/lista"})
     public String listaProductos(Model model) {
+
+        ArrayList<Integer> combobox = new ArrayList<>();
+        combobox.add(1);
+        combobox.add(2);
+        combobox.add(3);
+        combobox.add(4);
+
+        model.addAttribute("combobox", combobox);
         model.addAttribute("listaProductos", productoRepository.findAll());
+
         return "open/listaProductos";
     }
     //-------------------- Buscador de Productos FERNANDO--------------
