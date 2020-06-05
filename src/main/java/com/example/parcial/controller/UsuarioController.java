@@ -139,8 +139,7 @@ public class UsuarioController {
 
     @GetMapping("buscadorPedidos")
     public String buscadorNumeroPedidos(Model model,
-                                        RedirectAttributes attr,@RequestParam("nombrePedido") String nombrePedido,
-                                        HttpSession session){
+                                        RedirectAttributes attr,@RequestParam("nombrePedido") String nombrePedido){
 
         List<Pago> pedidosBuscados = pagoRepository.buscadorDePedidos(nombrePedido);
         if(pedidosBuscados.size()==0){
